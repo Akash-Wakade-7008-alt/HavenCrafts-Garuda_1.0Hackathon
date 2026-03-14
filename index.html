@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aura Home | Premium Handmade Decor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar transition-all" id="navbar">
+      <div class="nav-container">
+        <a href="#" class="logo">HavenArts<span class="logo-accent">.</span></a>
+        <div class="nav-links">
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#collections" class="nav-link">Home Decore and gifts</a>
+          <a href="#about" class="nav-link">Best Seller</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-icons">
+          <a href="#" class="icon-link"
+            ><i class="fa-solid fa-magnifying-glass"></i
+          ></a>
+          <a href="#" class="icon-link"><i class="fa-regular fa-heart"></i></a>
+          <a href="#" class="icon-link"
+            ><i class="fa-solid fa-bag-shopping"></i
+            ><span class="cart-count">0</span></a
+          >
+        </div>
+        <div class="mobile-menu-btn" id="mobile-menu-btn">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+      </div>
+      <!-- Mobile Menu Overlay -->
+      <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-close" id="mobile-menu-close">
+          <i class="fa-solid fa-xmark"></i>
+        </div>
+        <div class="mobile-nav-links">
+          <a href="#home" class="mobile-nav-link">Home</a>
+          <a href="#collections" class="mobile-nav-link">Collections</a>
+          <a href="#handmade" class="mobile-nav-sublink">- Handmade Items</a>
+          <a href="#wall-hangings" class="mobile-nav-sublink"
+            >- Wall Hangings</a
+          >
+          <a href="#gifting" class="mobile-nav-sublink">- Gifting Items</a>
+          <a href="#about" class="mobile-nav-link">Our Story</a>
+          <a href="#contact" class="mobile-nav-link">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+      <div class="hero-bg-image"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content reveal-up">
+        <span class="hero-subtitle">Artisan Crafted</span>
+        <h1 class="hero-title">Elevate Your Space with Handmade Elegance</h1>
+        <p class="hero-desc">
+          Discover our curated collection of artisanal home decor, from delicate
+          embroidery to timeless resin art.
+        </p>
+        <div class="hero-buttons">
+          <a href="#collections" class="btn btn-primary">Shop Now</a>
+          <a href="#about" class="btn btn-secondary">Explore Our Craft</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Categories / Collections -->
+    <section class="section collections-section" id="collections">
+      <div class="section-container">
+        <div class="section-header reveal-up">
+          <h2 class="section-title">Home Decor and Gifts</h2>
+          <p class="section-subtitle">
+            Browse our categories of meticulous craftsmanship
+          </p>
+        </div>
+
+        <div class="category-grid">
+          <!-- Category 1 -->
+          <a
+            href="https://m.media-amazon.com/images/I/8191lLl5eqL._AC_UF894,1000_QL80_.jpg"
+            class="category-card reveal-up"
+            style="transition-delay: 0.1s"
+          >
+            <div class="category-img-wrapper">
+              <!-- Placeholder for visual purposes -->
+              <div class="placeholder-img bg-terracotta">
+                <img src="https://www.thedecorvilla.com/cdn/shop/files/O1CN01kKQVOR26stcEBB1LS__2207954307718.jpg?v=1733139587" alt="" style="height: 80vh;">
+              </div>
+            </div>
+            <div class="category-content">
+              <h3 class="category-name">Wall Decore</h3>
+              <span class="category-link"
+                >Explore <i class="fa-solid fa-arrow-right"></i
+              ></span>
+            </div>
+          </a>
+
+          <!-- Category 2 -->
+          <a
+            href="#wall-hangings"
+            class="category-card reveal-up"
+            style="transition-delay: 0.2s"
+          >
+            <div class="category-img-wrapper">
+              <div class="placeholder-img bg-sage">
+                <img src="https://www.tiffanylightingdirect.co.uk/cdn/shop/files/110645_1.jpg?v=1744910163" alt="" style="height: 40vh;">
+              </div>
+            </div>
+            <div class="category-content">
+              <h3 class="category-name">Lamps</h3>
+              <span class="category-link"
+                >Explore <i class="fa-solid fa-arrow-right"></i
+              ></span>
+            </div>
+          </a>
+
+          <!-- Category 3 -->
+          <a
+            href="#gifting"
+            class="category-card reveal-up"
+            style="transition-delay: 0.3s"
+          >
+            <div class="category-img-wrapper">
+              <div class="placeholder-img bg-sand">
+                <img src="https://cdn1.igp.com/f_auto,q_auto,t_pnopt10prodlp/products/p-personalized-radiant-love-golden-metal-photo-frame-432583-m.jpg" alt="" style="height: 40vh;">
+              </div>
+            </div>
+            <div class="category-content">
+              <h3 class="category-name">Photo Frames</h3>
+              <span class="category-link"
+                >Explore <i class="fa-solid fa-arrow-right"></i
+              ></span>
+            </div>
+          </a>
+
+          <!-- Category 4 -->
+          <a
+            href="#resin-art"
+            class="category-card reveal-up"
+            style="transition-delay: 0.1s"
+          >
+            <div class="category-img-wrapper">
+              <div class="placeholder-img bg-slate">
+                <img src="https://www.harshitacraft.in/cdn/shop/files/A1_4994a65c-0720-460e-85a1-c96619f5f74a.jpg?v=1761556428" alt="">
+              </div>
+            </div>
+            <div class="category-content">
+              <h3 class="category-name">Wall Painting</h3>
+              <span class="category-link"
+                >Explore <i class="fa-solid fa-arrow-right"></i
+              ></span>
+            </div>
+          </a>
+
+          <!-- Category 5 -->
+          <a
+            href="#lippan-art"
+            class="category-card reveal-up"
+            style="transition-delay: 0.2s"
+          >
+            <div class="category-img-wrapper">
+              <div class="placeholder-img bg-clay">
+                <img src="https://5.imimg.com/data5/SELLER/Default/2024/7/434077840/GS/BC/ET/24417350/img-6151.jpg" alt="" style="height: 38vh;width: 26vw;">
+              </div>
+            </div>
+            <div class="category-content">
+              <h3 class="category-name">Lippan Art</h3>
+              <span class="category-link"
+                >Explore <i class="fa-solid fa-arrow-right"></i
+              ></span>
+            </div>
+          </a>
+
+          <!-- Category 6 -->
+          <a
+            href="#embroidery"
+            class="category-card reveal-up"
+            style="transition-delay: 0.3s"
+          >
+            <div class="category-img-wrapper">
+              <div class="placeholder-img bg-blush">
+                <img src="https://rukminim2.flixcart.com/image/480/480/xif0q/embroidery-frame-hoop/4/j/c/20-customised-love-embroidery-hoop-love-embroidery-original-imah2zkz5gdbr6hu.jpeg?q=90"  alt="" style="height: 38vh;width: 27vw;">
+              </div>
+            </div>
+            <div class="category-content">
+              <h3 class="category-name">Embroidery Hoops</h3>
+              <span class="category-link"
+                >Explore <i class="fa-solid fa-arrow-right"></i
+              ></span>
+            </div>
+          </a>
+
+          <!-- Category 7 -->
+          <a
+            href="#platters"
+            class="category-card reveal-up"
+            style="transition-delay: 0.1s"
+          >
+            <div class="category-img-wrapper">
+              <div class="placeholder-img bg-ochre">
+                <img src="https://i.etsystatic.com/20602380/r/il/fc25e2/3189642751/il_570xN.3189642751_fdmr.jpg" alt="">
+              </div>
+            </div>
+            <div class="category-content">
+              <h3 class="category-name">Raisine Arts</h3>
+              <span class="category-link"
+                >Explore <i class="fa-solid fa-arrow-right"></i
+              ></span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products Showcase -->
+    <section
+      class="section showcase-section bg-light"
+      id="featured"
+      style="margin-left: 2vw"
+    >
+      <div class="section-container">
+        <div class="section-header reveal-up">
+          <h2 class="section-title">Best Seller</h2>
+          <p class="section-subtitle">Our most loved creations this season</p>
+        </div>
+
+        <div class="product-grid">
+          <!-- Product 1 -->
+          <div class="product-card reveal-up">
+            <div class="product-img-container">
+              <div class="placeholder-img bg-sage">
+                <img src="https://m.media-amazon.com/images/I/8191lLl5eqL._AC_UF894,1000_QL80_.jpg" alt="" style="height: 40vh;"> 
+              </div>
+              <div class="product-badges">
+                <span class="badge new">New</span>
+              </div>
+              <div class="product-actions">
+                <button class="action-btn" title="Add to Wishlist">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+                <button class="action-btn" title="Quick View">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-info">
+              <div class="product-category">Lippan Art</div>
+              <h3 class="product-title">
+                <a href="#">Traditional Mud Mirror Art Panel</a>
+              </h3>
+              <div class="product-price">$120.00</div>
+              <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <!-- Product 1 -->
+          <div class="product-card reveal-up">
+            <div class="product-img-container">
+              <div class="placeholder-img bg-sage">
+                <img src="https://decorbytheway.com/cdn/shop/files/B455800E-CB15-4A1A-A9A1-2D894350DF7C.jpg?v=1755070255" alt="">
+              </div>
+              <div class="product-badges">
+                <span class="badge new">New</span>
+              </div>
+              <div class="product-actions">
+                <button class="action-btn" title="Add to Wishlist">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+                <button class="action-btn" title="Quick View">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-info">
+              <div class="product-category">Lippan Art</div>
+              <h3 class="product-title">
+                <a href="#">Traditional Mud Mirror Art Panel</a>
+              </h3>
+              <div class="product-price">$120.00</div>
+              <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <!-- Product 1 -->
+          <div class="product-card reveal-up">
+            <div class="product-img-container">
+              <div class="placeholder-img bg-sage">
+                <img src="https://pchomedecor.com/cdn/shop/products/images_2Fca1956ff-88db-49b2-8dac-1d5cf1dd36ff.jpg?v=1699364568" alt=""  style="height: 40vh;">
+              </div>
+              <div class="product-badges">
+                <span class="badge new">New</span>
+              </div>
+              <div class="product-actions">
+                <button class="action-btn" title="Add to Wishlist">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+                <button class="action-btn" title="Quick View">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-info">
+              <div class="product-category">Lippan Art</div>
+              <h3 class="product-title">
+                <a href="#">Traditional Mud Mirror Art Panel</a>
+              </h3>
+              <div class="product-price">$120.00</div>
+              <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <!-- Product 1 -->
+          <div class="product-card reveal-up">
+            <div class="product-img-container">
+              <div class="placeholder-img bg-sage">
+                <img src="https://www.jainsonsemporio.com/cdn/shop/products/RSJ-C009_BT_LampLED.1.jpg?v=1755373366" alt=""  style="height: 40vh;width: 20vw;">
+              </div>
+              <div class="product-badges">
+                <span class="badge new">New</span>
+              </div>
+              <div class="product-actions">
+                <button class="action-btn" title="Add to Wishlist">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+                <button class="action-btn" title="Quick View">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-info">
+              <div class="product-category">Lippan Art</div>
+              <h3 class="product-title">
+                <a href="#">Traditional Mud Mirror Art Panel</a>
+              </h3>
+              <div class="product-price">$120.00</div>
+              <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <!-- Product 1 -->
+          <div class="product-card reveal-up">
+            <div class="product-img-container">
+              <div class="placeholder-img bg-sage">
+                <img src="https://assets.winni.in/product/primary/2024/12/100787.jpeg?dpr=2&w=220" alt=""  style="height: 40vh;">
+              </div>
+              <div class="product-badges">
+                <span class="badge new">New</span>
+              </div>
+              <div class="product-actions">
+                <button class="action-btn" title="Add to Wishlist">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+                <button class="action-btn" title="Quick View">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-info">
+              <div class="product-category">Lippan Art</div>
+              <h3 class="product-title">
+                <a href="#">Traditional Mud Mirror Art Panel</a>
+              </h3>
+              <div class="product-price">$120.00</div>
+              <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <!-- Product 1 -->
+          <div class="product-card reveal-up">
+            <div class="product-img-container">
+              <div class="placeholder-img bg-sage">
+                <img src="https://artstreet.in/cdn/shop/files/81-53B_2zJL._SL1500_700x700.jpg?v=1755504162" alt=""  style="height: 40vh;">
+              </div>
+              <div class="product-badges">
+                <span class="badge new">New</span>
+              </div>
+              <div class="product-actions">
+                <button class="action-btn" title="Add to Wishlist">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+                <button class="action-btn" title="Quick View">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-info">
+              <div class="product-category">Lippan Art</div>
+              <h3 class="product-title">
+                <a href="#">Traditional Mud Mirror Art Panel</a>
+              </h3>
+              <div class="product-price">$120.00</div>
+              <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <!-- Product 1 -->
+          <div class="product-card reveal-up">
+            <div class="product-img-container">
+              <div class="placeholder-img bg-sage">
+                <img src="https://scoopmyart.com/wp-content/uploads/2024/06/inbound773241593902715678.webp" alt="">
+              </div>
+              <div class="product-badges">
+                <span class="badge new">New</span>
+              </div>
+              <div class="product-actions">
+                <button class="action-btn" title="Add to Wishlist">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+                <button class="action-btn" title="Quick View">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-info">
+              <div class="product-category">Lippan Art</div>
+              <h3 class="product-title">
+                <a href="#">Traditional Mud Mirror Art Panel</a>
+              </h3>
+              <div class="product-price">$120.00</div>
+              <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <!-- Product 1 -->
+          <div class="product-card reveal-up">
+            <div class="product-img-container">
+              <div class="placeholder-img bg-sage">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfwKkmCXch3qw3zoFoDWAxoyXzYoL5mgQkvA&s" alt=""  style="height: 40vh;">
+              </div>
+              <div class="product-badges">
+                <span class="badge new">New</span>
+              </div>
+              <div class="product-actions">
+                <button class="action-btn" title="Add to Wishlist">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+                <button class="action-btn" title="Quick View">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-info">
+              <div class="product-category">Lippan Art</div>
+              <h3 class="product-title">
+                <a href="#">Traditional Mud Mirror Art Panel</a>
+              </h3>
+              <div class="product-price">$120.00</div>
+              <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <!-- Product 1 -->
+          <div class="product-card reveal-up">
+            <div class="product-img-container">
+              <div class="placeholder-img bg-sage">
+                <img src="https://customcraft.in/cdn/shop/files/luxuryresinart-20240223-0158.jpg?v=1712309332" alt=""  style="height: 40vh;">
+              </div>
+              <div class="product-badges">
+                <span class="badge new">New</span>
+              </div>
+              <div class="product-actions">
+                <button class="action-btn" title="Add to Wishlist">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+                <button class="action-btn" title="Quick View">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-info">
+              <div class="product-category">Lippan Art</div>
+              <h3 class="product-title">
+                <a href="#">Traditional Mud Mirror Art Panel</a>
+              </h3>
+              <div class="product-price">$120.00</div>
+              <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <!-- Product 1 -->
+          <div class="product-card reveal-up">
+            <div class="product-img-container">
+              <div class="placeholder-img bg-sage">
+                <img src="https://static1.squarespace.com/static/60f960aac2eb604dcfb280fa/62e1da4cfd64402e8f84903b/666d65570f8b397750c8cac1/1763342023104/ocean-art1.jpg?format=1500w" alt=""  style="height: 40vh;">
+              </div>
+              <div class="product-badges">
+                <span class="badge new">New</span>
+              </div>
+              <div class="product-actions">
+                <button class="action-btn" title="Add to Wishlist">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+                <button class="action-btn" title="Quick View">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-info">
+              <div class="product-category">Lippan Art</div>
+              <h3 class="product-title">
+                <a href="#">Traditional Mud Mirror Art Panel</a>
+              </h3>
+              <div class="product-price">$120.00</div>
+              <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+        <div class="center-btn reveal-up">
+          <a href="#collections" class="btn btn-outline">View All Products</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features / Value Props -->
+    <section class="features-section">
+      <div class="container feature-container">
+        <div class="feature-item reveal-up">
+          <div class="feature-icon">
+            <i class="fa-solid fa-hands-holding-circle"></i>
+          </div>
+          <h4 class="feature-title">100% Handmade</h4>
+          <p class="feature-desc">
+            Crafted with care and precision by skilled artisans.
+          </p>
+        </div>
+        <div class="feature-item reveal-up" style="transition-delay: 0.1s">
+          <div class="feature-icon"><i class="fa-solid fa-leaf"></i></div>
+          <h4 class="feature-title">Eco-Friendly</h4>
+          <p class="feature-desc">
+            Sustainable materials that are kind to the earth.
+          </p>
+        </div>
+        <div class="feature-item reveal-up" style="transition-delay: 0.2s">
+          <div class="feature-icon"><i class="fa-solid fa-box-open"></i></div>
+          <h4 class="feature-title">Secure Packaging</h4>
+          <p class="feature-desc">
+            Ensuring your delicate art arrives in perfect condition.
+          </p>
+        </div>
+        <div class="feature-item reveal-up" style="transition-delay: 0.3s">
+          <div class="feature-icon"><i class="fa-solid fa-gift"></i></div>
+          <h4 class="feature-title">Perfect Gifts</h4>
+          <p class="feature-desc">
+            Unique pieces for memories that last a lifetime.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-grid">
+          <div class="footer-col brand-col">
+            <a href="#" class="logo footer-logo"
+              >Aura<span class="logo-accent">.</span></a
+            >
+            <p class="footer-text">
+              Elevating everyday spaces with exceptional handmade artistry and
+              mindful design. Bring soul to your home.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+              <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4 class="footer-heading">Shop</h4>
+            <ul class="footer-links">
+              <li><a href="#handmade">Handmade Items</a></li>
+              <li><a href="#wall-hangings">Wall Hangings</a></li>
+              <li><a href="#gifting">Gifting Items</a></li>
+              <li><a href="#resin-art">Resin Art</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4 class="footer-heading">Collections</h4>
+            <ul class="footer-links">
+              <li><a href="#lippan-art">Lippan Art</a></li>
+              <li><a href="#embroidery">Embroidery Hoops</a></li>
+              <li><a href="#platters">Ring Platters</a></li>
+              <li><a href="#custom">Custom Orders</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4 class="footer-heading">Join Our Newsletter</h4>
+            <p class="footer-text">
+              Subscribe to get special offers, free giveaways, and
+              once-in-a-lifetime deals.
+            </p>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Enter your email" required />
+              <button type="submit">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 Aura Home Decor. All rights reserved.</p>
+          <div class="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

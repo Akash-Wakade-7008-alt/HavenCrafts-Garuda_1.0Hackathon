@@ -263,7 +263,11 @@
     <!-- Toast -->
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+    <script src="auth.js"></script>
     <script>
+        // Redirect if already logged in
+        if (typeof redirectIfLoggedIn === 'function') redirectIfLoggedIn();
+
         /* =============================================
            SHOW / HIDE PASSWORD TOGGLES
         ============================================= */
@@ -394,14 +398,30 @@
 
             setTimeout(() => {
                 signupBtn.classList.remove('loading');
+
+                // Realistic Simulation
+                const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+                if (users.find(u => u.email === email)) {
+                    showError('email', 'emailError', 'Email is already registered.');
+                    signupBtn.disabled = false;
+                    return;
+                }
+
+                users.push({ name, email, password: pw });
+                localStorage.setItem('registeredUsers', JSON.stringify(users));
+
+                // Store CurrentSession
+                setAuthUser({ name, email, isLoggedIn: true });
+                authToast('Welcome to HavenCraft, ' + name + '!');
+
                 signupBtn.classList.add('success');
                 signupBtn.querySelector('.btn-text').textContent = '✓ Account created!';
-                showToast('🎉 Account created successfully (demo)', false);
-                setTimeout(() => {
-                    signupBtn.classList.remove('success');
-                    signupBtn.querySelector('.btn-text').textContent = 'Create Account';
-                    signupBtn.disabled = false;
-                }, 3500);
+
+                // Smart Navigation Check
+                const redirect = localStorage.getItem('redirectAfterLogin') || 'home.html';
+                localStorage.removeItem('redirectAfterLogin');
+
+                setTimeout(() => window.location.href = redirect, 1000);
             }, 1400);
         });
 

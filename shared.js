@@ -2,6 +2,10 @@
    HAVENCRAFT SHARED JAVASCRIPT
 ========================================= */
 
+if (!document.querySelector('script[src="auth.js"]')) {
+  document.write('<script src="auth.js"><\/script>');
+}
+
 // 1. Data Generation
 const CATEGORY_DATA = {
   wooden: { title: 'Wooden & Handmade Arts', parent: 'Decor', imgs: ['https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=400&q=75', 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=75'] },
@@ -36,7 +40,8 @@ function generateDummyData(catKey, count = 64) {
 const formatPrice = (p) => `₹${p.toLocaleString('en-IN')}`;
 
 // 3. Cart Management
-let cartCount = parseInt(localStorage.getItem('hc_cart_count') || '0', 10);
+let cartItems = JSON.parse(localStorage.getItem('hc_cart_items') || '[]');
+let cartCount = cartItems.length;
 
 function updateCartBadge() {
   const badge = document.getElementById('cartBadge');
@@ -47,11 +52,48 @@ function updateCartBadge() {
   }
 }
 
-function addToCart() {
-  cartCount++;
-  localStorage.setItem('hc_cart_count', cartCount);
+function addToCart(p = null) {
+  if (!protectAction()) return;
+  let prod = p;
+  if (typeof p === 'string') prod = currentProducts.find(x => x.id === p) || activeProd;
+  if (!prod) prod = activeProd;
+  if (!prod) return;
+
+  cartItems.push({
+    name: prod.name,
+    price: prod.price,
+    img: prod.img,
+    id: prod.id || ('p' + Date.now())
+  });
+  cartCount = cartItems.length;
+  localStorage.setItem('hc_cart_items', JSON.stringify(cartItems));
   updateCartBadge();
   showToast('Added to cart 🛒');
+}
+
+function buyNow(p = null) {
+  if (!protectAction()) return;
+  let prod = p;
+  if (typeof p === 'string') prod = currentProducts.find(x => x.id === p) || activeProd;
+  if (!prod) prod = activeProd;
+  if (!prod) return;
+
+  let custStr = null;
+  const cData = JSON.parse(localStorage.getItem('customizationData'));
+  if (cData && cData.product === prod.name) {
+    custStr = cData.options;
+  }
+
+  const currentOrder = {
+    name: prod.name,
+    price: prod.price,
+    img: prod.img,
+    customization: custStr,
+    qty: 1
+  };
+  localStorage.setItem('currentOrder', JSON.stringify(currentOrder));
+  showToast('Proceeding to Direct Checkout...');
+  setTimeout(() => window.location.href = 'payment.html', 800);
 }
 
 // 4. Toast
@@ -126,8 +168,9 @@ function injectGlobalUI() {
           <div class="detail-price" id="dPrice"></div>
           <div class="detail-desc" id="dDesc"></div>
           <div class="detail-actions">
-            <button class="btn btn-buy" id="dBuyBtn">🛒 Buy Now</button>
-            <button class="btn btn-cust" id="dCustBtn">✏️ Customize</button>
+            <button class="btn btn-buy" id="dBuyBtn" style="background:var(--sage);color:#fff;">🛒 Buy Now</button>
+            <button class="btn btn-cust" id="dAddCartBtn">➕ Add Cart</button>
+            <button class="btn btn-cust" id="dCustBtn" style="grid-column: span 2;">✏️ Customize</button>
           </div>
         </div>
       </div>
@@ -195,7 +238,8 @@ function setupModals() {
     });
   });
 
-  document.getElementById('dBuyBtn').addEventListener('click', () => { addToCart(); closeModals(); });
+  document.getElementById('dBuyBtn').addEventListener('click', () => { closeModals(); buyNow(activeProd); });
+  document.getElementById('dAddCartBtn').addEventListener('click', () => { addToCart(activeProd); });
   document.getElementById('dCustBtn').addEventListener('click', () => {
     closeModals();
     setTimeout(() => openCust(activeProd), 350);
@@ -215,6 +259,7 @@ function openDetail(id) {
 }
 
 function openCust(p) {
+  if (!protectAction()) return;
   if (typeof p === 'string') p = currentProducts.find(x => x.id === p); // Handle ID passage
   activeProd = p;
   document.getElementById('cTitle').textContent = `Customize: ${p.name}`;
@@ -302,7 +347,7 @@ function renderGrid(products) {
         <div class="card-name">${p.name}</div>
         <div class="card-price">${formatPrice(p.price)}</div>
         <div class="card-actions">
-          <button class="btn btn-buy" onclick="event.stopPropagation(); addToCart()">Buy Now</button>
+          <button class="btn btn-buy" onclick="event.stopPropagation(); buyNow('${p.id}')">Buy Now</button>
           <button class="btn btn-cust" onclick="event.stopPropagation(); openCust('${p.id}')">Customize</button>
         </div>
       </div>

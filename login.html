@@ -210,10 +210,12 @@
                         </div>
 
                         <!-- Submit -->
-                        <button type="submit" class="btn-submit" id="loginBtn">
-                            <div class="spinner"></div>
-                            <span class="btn-text">Login</span>
-                        </button>
+                        <a href="./home.html">
+                            <button type="submit" class="btn-submit" id="loginBtn">
+                                <div class="spinner"></div>
+                                <span class="btn-text">Login</span>
+                            </button>
+                        </a>
 
                     </form>
 
@@ -269,7 +271,11 @@
         </div>
     </div>
 
+    <script src="auth.js"></script>
     <script>
+        // Redirect if already logged in
+        if (typeof redirectIfLoggedIn === 'function') redirectIfLoggedIn();
+
         /* =============================================
            SHOW / HIDE PASSWORD
         ============================================= */
@@ -340,6 +346,7 @@
                 clearError('password', 'passwordError');
             }
 
+            // valid is false if one field fails
             if (!valid) return;
 
             // Simulate loading → success
@@ -348,15 +355,26 @@
 
             setTimeout(() => {
                 loginBtn.classList.remove('loading');
+
+                // Realistic Simulation
+                const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+                const foundUser = users.find(u => u.email === emailVal && u.password === pwVal);
+
+                let name = foundUser ? foundUser.name : emailVal.split('@')[0];
+
+                // Store CurrentSession
+                setAuthUser({ name, email: emailVal, isLoggedIn: true });
+                authToast('Welcome, ' + name + '!');
+
                 loginBtn.classList.add('success');
-                loginBtn.querySelector('.btn-text').textContent = '✓ Login successful';
-                showToast('🎉 Login successful (demo)', false);
-                setTimeout(() => {
-                    loginBtn.classList.remove('success');
-                    loginBtn.querySelector('.btn-text').textContent = 'Login';
-                    loginBtn.disabled = false;
-                }, 3000);
-            }, 1200);
+                loginBtn.querySelector('.btn-text').textContent = '✓ Logged In';
+
+                // Smart Navigation Check
+                const redirect = localStorage.getItem('redirectAfterLogin') || 'home.html';
+                localStorage.removeItem('redirectAfterLogin');
+
+                setTimeout(() => window.location.href = redirect, 800);
+            }, 800);
         });
 
         /* =============================================

@@ -842,8 +842,10 @@
                 <div class="detail-price" id="detailPrice"></div>
                 <div class="detail-desc" id="detailDesc"></div>
                 <div class="detail-actions">
-                    <button class="btn btn-buy" id="detailBuy">🛒 Buy Now</button>
-                    <button class="btn btn-cust" id="detailCust">✏️ Customize</button>
+                    <button class="btn btn-buy" id="detailBuy" style="background:var(--sage);color:#fff;">🛒 Buy
+                        Now</button>
+                    <button class="btn btn-cust" id="detailAddCart">➕ Add Cart</button>
+                    <button class="btn btn-cust" id="detailCust" style="grid-column: span 2;">✏️ Customize</button>
                 </div>
             </div>
         </div>
@@ -921,6 +923,7 @@
     <!-- TOAST -->
     <div class="toast" id="toast"></div>
 
+    <script src="auth.js"></script>
     <script>
         /* ───────────── DATA ───────────── */
         const DECOR_SUBS = [
@@ -1011,16 +1014,58 @@
         ];
 
         /* ───────────── CART ───────────── */
-        let cartCount = 0;
+        let cartItems = JSON.parse(localStorage.getItem('hc_cart_items') || '[]');
+        let cartCount = cartItems.length;
         const badge = document.getElementById('cartBadge');
+        if (badge) badge.textContent = cartCount;
 
-        function addToCart() {
-            cartCount++;
+        function updateBadge() {
             badge.textContent = cartCount;
             badge.classList.remove('pop');
             void badge.offsetWidth;
             badge.classList.add('pop');
+        }
+
+        function addToCart(p = null) {
+            if (!protectAction()) return;
+            let prod = p;
+            if (typeof p === 'string') prod = currentProducts.find(x => x.id === p) || activeProd;
+            if (!prod) prod = activeProd;
+            if (!prod) return;
+            cartItems.push({
+                name: prod.name,
+                price: prod.price,
+                img: prod.img,
+                id: 'p' + Date.now()
+            });
+            cartCount = cartItems.length;
+            localStorage.setItem('hc_cart_items', JSON.stringify(cartItems));
+            updateBadge();
             showToast('Added to cart 🛒');
+        }
+
+        function buyNow(p = null) {
+            if (!protectAction()) return;
+            let prod = p;
+            if (typeof p === 'string') prod = currentProducts.find(x => x.id === p) || activeProd;
+            if (!prod) prod = activeProd;
+            if (!prod) return;
+            let custStr = null;
+            const cData = JSON.parse(localStorage.getItem('customizationData'));
+            if (cData && cData.product === prod.name) {
+                custStr = cData.customization;
+            }
+
+            const currentOrder = {
+                name: prod.name,
+                price: prod.price,
+                img: prod.img,
+                customization: custStr,
+                qty: 1
+            };
+            localStorage.setItem('currentOrder', JSON.stringify(currentOrder));
+            showToast('Proceeding to Direct Checkout...');
+            setTimeout(() => window.location.href = 'payment.html', 800);
         }
 
         /* ───────────── TOAST ───────────── */
@@ -1086,7 +1131,14 @@
         document.getElementById('detailClose').addEventListener('click', closeDetail);
         detailOverlay.addEventListener('click', e => { if (e.target === detailOverlay) closeDetail(); });
 
-        document.getElementById('detailBuy').addEventListener('click', () => { addToCart(); closeDetail(); });
+        document.getElementById('detailBuy').addEventListener('click', () => {
+            closeDetail();
+            if (activeProduct) buyNow(activeProduct);
+        });
+        document.getElementById('detailAddCart').addEventListener('click', () => {
+            if (activeProduct) addToCart(activeProduct);
+            closeDetail();
+        });
         document.getElementById('detailCust').addEventListener('click', () => {
             closeDetail();
             if (activeProduct) openCust(activeProduct.name);
@@ -1096,10 +1148,12 @@
         const custOverlay = document.getElementById('custOverlay');
         let custProductName = '';
 
-        function openCust(name) {
-            custProductName = name;
-            document.getElementById('custProductName').textContent = `Customize: ${name}`;
-            custOverlay.classList.add('open');
+        function openCust(p) {
+            if (!protectAction()) return;
+            if (typeof p === 'string') p = currentProducts.find(x => x.id === p); // Handle ID passage
+            activeProd = p;
+            document.getElementById('custProductName').textContent = `Customize: ${p.name}`;
+            document.getElementById('custOverlay').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
 
@@ -1157,7 +1211,13 @@
             // Buy Now button
             if (e.target.classList.contains('buy-btn')) {
                 e.stopPropagation();
-                addToCart();
+                const card = e.target.closest('.card');
+                buyNow({
+                    name: card.dataset.name,
+                    img: card.dataset.img,
+                    desc: card.dataset.desc,
+                    price: card.dataset.price
+                });
                 return;
             }
             // Customize button

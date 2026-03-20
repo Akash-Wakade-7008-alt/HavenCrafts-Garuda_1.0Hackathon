@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HavenCraft - Textile & Fabric Decor</title>
+    <link rel="stylesheet" href="shared.css">
+</head>
+
+<body>
+    <main class="main">
+        <div class="breadcrumb">
+            <a href="home.html">Home</a> &gt;
+            <a href="home.html#decor" id="bcParent">Decor</a> &gt;
+            <span id="bcCurrent">Textile & Fabric Decor</span>
+        </div>
+
+        <h1 class="page-title" id="pageTitle">Textile & Fabric Decor</h1>
+
+        <div class="toolbar">
+            <div class="results-count" id="resCount">Showing 0 results</div>
+            <div class="toolbar-actions">
+                <select class="select-box" id="sortSelect">
+                    <option value="default">Sort: Recommended</option>
+                    <option value="low">Price: Low to High</option>
+                    <option value="high">Price: High to Low</option>
+                </select>
+                <select class="select-box" id="filterSelect">
+                    <option value="all">Filter: All</option>
+                    <option value="popular">Popular</option>
+                </select>
+            </div>
+        </div>
+        <div class="product-grid" id="productGrid"></div>
+    </main>
+
+    <script src="shared.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => initCategoryPage('textile'));
+    </script>
+</body>
+
+</html>

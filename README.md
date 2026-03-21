@@ -1,47 +1,66 @@
-# 🌟 HevanCraft Website
+<h1 align="center">HevanCraft ✨</h1>
 
-HevanCraft is a modern e-commerce web application that allows users to browse products, customize them, add items to the cart, and complete purchases through a smooth and interactive user experience.
+<p align="center">
+  A modern, customizable e-commerce experience crafted with clean UI and seamless user flow.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Frontend-HTML%20%7C%20CSS%20%7C%20JavaScript-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Storage-LocalStorage-green?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Status-Active-success?style=for-the-badge" />
+</p>
+
+---
+
+## 🧾 About the Project
+
+HevanCraft is a thoughtfully designed frontend e-commerce application that simulates a real-world shopping experience without relying on a backend.
+
+The focus of this project is not just functionality, but clarity, smooth interaction, and a clean user experience across every step of the journey.
+
+---
+
+## 🌐 Live Demo
+
+(Add your deployed link here)  
+Example: https://your-site-link.com
+
+---
+
+## 📸 Preview
+
+Add screenshots inside your assets folder and link them like this:
+
+![Home](assets/preview-home.png)  
+![Cart](assets/preview-cart.png)  
+![Checkout](assets/preview-checkout.png)
 
 ---
 
 ## 🚀 Features
 
-- 🛍️ Product Browsing  
-  Explore a variety of products with detailed views  
+- Product browsing with clean UI  
+- Product customization with saved preferences  
+- Dynamic cart with real-time updates  
+- Quantity control inside cart  
+- Structured checkout with delivery form  
+- Order summary with pricing details  
+- Multiple payment options (COD, UPI, Card UI)  
+- Success page after order placement  
+- Persistent data using Local Storage  
 
-- 🎨 Product Customization  
-  Users can customize products before purchasing  
-  Customization data is stored using local storage  
+---
 
-- 🛒 Cart System  
-  Add to cart functionality  
-  Dynamic cart count update  
-  View selected items with full details  
+## 🛍️ User Flow
 
-- ➕➖ Quantity Management  
-  Increase or decrease product quantity directly in cart  
-
-- 💳 Checkout System  
-  Delivery form (Name, Address, Email, Phone)  
-  Order summary displayed before payment  
-
-- ✅ Order Success Page  
-  Confirmation message after successful checkout  
-
-- 💾 Local Storage Integration  
-  Cart items and customization persist across pages  
+Home → Product → Add to Cart → Cart → Checkout → Payment → Success
 
 ---
 
 ## 🧱 Tech Stack
 
-Frontend:
-- HTML5
-- CSS3
-- JavaScript (Vanilla JS)
-
-Storage:
-- Browser Local Storage
+Frontend: HTML5, CSS3, JavaScript  
+Storage: Browser Local Storage  
 
 ---
 
@@ -49,81 +68,74 @@ Storage:
 
 HevanCraft/
 │
-├── home.html
-├── cart.html
-├── payment.html
-├── success.html
+├── home.html  
+├── cart.html  
+├── payment.html  
+├── success.html  
 │
-├── css/
-│   └── style.css
+├── css/  
+│   └── style.css  
 │
-├── js/
-│   ├── script.js
-│   ├── cart.js
-│   └── payment.js
+├── js/  
+│   ├── script.js  
+│   ├── cart.js  
+│   └── payment.js  
 │
-├── assets/
-│   ├── images/
-│   └── icons/
+├── assets/  
+│   ├── images/  
+│   └── icons/  
 │
-└── README.md
+└── README.md  
 
 ---
 
-## ⚙️ How It Works
+## 🎯 Design Philosophy
 
-1. Browse Products  
-   Users explore products from the homepage  
-
-2. Add to Cart  
-   Clicking "Add to Cart" stores item details in local storage  
-   Cart count updates automatically  
-
-3. View Cart  
-   Users can see all selected items in cart.html  
-   Modify quantity and customization  
-
-4. Proceed to Checkout  
-   Redirects to payment.html  
-   User fills delivery details  
-   Order summary is displayed  
-
-5. Complete Payment  
-   Clicking "Pay Now" navigates to success.html  
+- Simplicity over complexity  
+- Smooth and logical user flow  
+- Clean UI with minimal distractions  
+- Functional design focused on usability  
 
 ---
 
-## 🛠️ Setup Instructions
+## ⚙️ Getting Started
 
-1. Clone the repository:
-   git clone https://github.com/your-username/HevanCraft.git
+Clone the repository:
 
-2. Open the project folder:
-   cd HevanCraft
+git clone https://github.com/your-username/HevanCraft.git  
+cd HevanCraft  
 
-3. Run the project:
-   Open home.html in your browser
+Run the project:
+
+Open home.html in your browser
 
 ---
 
-## ✨ Future Improvements
+## 🌱 Future Enhancements
 
-- User Authentication (Login/Signup)
-- Payment Gateway Integration (Stripe/Razorpay)
-- Backend Integration (Node.js / Firebase)
-- Fully Responsive Design
-- AI-based product recommendations
+- Authentication system (Login / Signup)  
+- Payment gateway integration (Razorpay / Stripe)  
+- Backend integration (Node.js / Firebase)  
+- Fully responsive design  
+- AI-based product recommendations  
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome!
+Contributions are welcome.
 
 1. Fork the repository  
-2. Create a new branch  
-3. Make your changes  
-4. Submit a pull request  
+2. Create a feature branch  
+3. Commit your changes  
+4. Open a pull request  
+
+---
+
+## 👨‍💻 Author
+
+Akash Wakade  
+B.Tech CSE (AI) | Web Developer  
 
 ---
 
@@ -133,6 +145,6 @@ This project is open-source and available under the MIT License.
 
 ---
 
-## 👨‍💻 Author
-
-Developed by Akash Wakade
+<p align="center">
+  Made with ❤️ and attention to detail
+</p>

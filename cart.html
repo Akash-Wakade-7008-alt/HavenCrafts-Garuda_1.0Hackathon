@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Cart – HavenCraft</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <style>
+        /* Existing CSS Variables from index.html / shared.css */
+        :root {
+            --cream: #faf7f2;
+            --beige: #f2ebe0;
+            --warm-white: #fffcf8;
+            --sage: #8aad8f;
+            --sage-dark: #5e8363;
+            --rose: #d4907e;
+            --text-dark: #2c2c2c;
+            --text-mid: #5a5a5a;
+            --text-light: #8a8a8a;
+            --border: #e8e0d5;
+            --radius: 16px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text-dark); line-height: 1.6; }
+        
+        /* Navbar */
+        #navbar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 72px; padding: 0 6%;
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(255, 252, 248, 0.95); border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.85rem; font-weight: 600; text-decoration: none; color: var(--text-dark); }
+        .nav-actions { display: flex; gap: 12px; align-items: center; }
+        .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text-mid); padding: 10px 24px; border-radius: 50px; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: all var(--transition); }
+        .btn-outline:hover { border-color: var(--sage); color: var(--sage-dark); background: rgba(138, 173, 143, 0.08); }
+        .btn-primary { background: linear-gradient(135deg, var(--sage), var(--sage-dark)); color: white; border: none; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-size: 0.9rem; font-weight: 500; box-shadow: 0 4px 16px rgba(94, 131, 99, 0.35); transition: all var(--transition); cursor: pointer; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(94, 131, 99, 0.45); }
+        
+        /* Cart Layout */
+        .cart-container { padding: 120px 6% 60px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr; gap: 40px; align-items: start; }
+        @media(max-width: 900px) { .cart-container { grid-template-columns: 1fr; } }
+        
+        .cart-header { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 600; margin-bottom: 24px; color: var(--text-dark); }
+        
+        /* Items List */
+        .cart-items { display: flex; flex-direction: column; gap: 20px; }
+        .cart-item { background: var(--warm-white); border-radius: var(--radius); padding: 20px; display: flex; gap: 24px; border: 1px solid var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.03); position: relative; transition: transform 0.3s, box-shadow 0.3s; }
+        .cart-item:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+        @media(max-width: 600px) { .cart-item { flex-direction: column; } }
+        
+        .item-img { width: 140px; height: 140px; border-radius: 12px; object-fit: cover; }
+        @media(max-width: 600px) { .item-img { width: 100%; height: 200px; } }
+        
+        .item-details { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .item-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--text-dark); margin-bottom: 4px; }
+        .item-desc { font-size: 0.85rem; color: var(--text-light); margin-bottom: 8px; line-height: 1.5; }
+        .item-cust { font-size: 0.85rem; color: var(--sage-dark); font-weight: 500; background: rgba(138, 173, 143, 0.1); padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 12px; align-self: flex-start; }
+        
+        .item-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+        .item-price { font-size: 1.1rem; font-weight: 600; color: var(--sage-dark); }
+        
+        .qty-controls { display: flex; align-items: center; gap: 12px; background: var(--beige); padding: 6px; border-radius: 50px; }
+        .qty-btn { width: 28px; height: 28px; border-radius: 50%; border: none; background: var(--warm-white); color: var(--text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: background 0.2s; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+        .qty-btn:hover { background: #fff; transform: scale(1.05); }
+        .qty-val { font-size: 0.95rem; font-weight: 600; width: 20px; text-align: center; }
+        
+        .remove-btn { position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--text-light); cursor: pointer; font-size: 1.2rem; transition: color 0.2s; }
+        .remove-btn:hover { color: var(--rose); }
+        
+        /* Summary Sidebar */
+        .cart-summary { background: var(--warm-white); border-radius: var(--radius); padding: 32px; border: 1px solid var(--border); box-shadow: 0 10px 40px rgba(0,0,0,0.05); position: sticky; top: 100px; }
+        .summary-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 16px; color: var(--text-dark); }
+        
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 16px; font-size: 0.95rem; color: var(--text-mid); }
+        .summary-row.total { font-size: 1.25rem; font-weight: 600; color: var(--text-dark); border-top: 1px solid var(--border); padding-top: 16px; margin-top: 8px; margin-bottom: 28px; }
+        
+        .checkout-btn { width: 100%; display: flex; justify-content: center; align-items: center; padding: 14px; background: linear-gradient(135deg, var(--sage), var(--sage-dark)); color: white; border: none; border-radius: 12px; font-size: 1.05rem; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 6px 20px rgba(94, 131, 99, 0.3); }
+        .checkout-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(94, 131, 99, 0.4); }
+        
+        /* Empty State */
+        .empty-cart { text-align: center; padding: 60px 20px; background: var(--warm-white); border-radius: var(--radius); border: 1px dashed var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+        .empty-cart h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 12px; color: var(--text-dark); }
+        .empty-cart p { color: var(--text-mid); margin-bottom: 32px; }
+        .empty-icon { font-size: 3.5rem; margin-bottom: 20px; opacity: 0.6; }
+
+        /* Toast */
+        .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(70px); background: var(--sage-dark); color: #fff; padding: 12px 24px; border-radius: 50px; font-size: 0.88rem; font-weight: 500; z-index: 10000; transition: all 0.3s; opacity: 0; pointer-events: none; }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <a href="index.html" class="nav-logo">HavenCraft</a>
+        <div class="nav-actions">
+            <!-- Global Cart Icon -->
+            <a href="cart.html" style="text-decoration: none; position: relative; font-size: 1.4rem; color: var(--text-dark); margin-right: 12px;">
+                🛒<span class="global-cart-badge" id="cartBadge" style="position: absolute; top: -4px; right: -8px; background: var(--rose); color: #fff; font-size: 0.65rem; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 0.2s;">0</span>
+            </a>
+            <!-- Auth Navigation Handled via auth.js dynamically mapping .nav-links -->
+            <ul class="nav-links" style="display:flex; list-style:none; gap:12px; align-items:center; margin:0; padding:0;">
+                <li class="auth-node"><a href="login.html" class="btn-outline">Login</a></li>
+                <li class="auth-node"><a href="signup.html" class="btn-primary">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- MAIN CART CONTENT -->
+    <div class="cart-container">
+        <div>
+            <h1 class="cart-header">Your Shopping Cart</h1>
+            <div id="cartItemsContainer" class="cart-items">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+
+        <!-- SUMMARY SIDEBAR -->
+        <aside class="cart-summary" id="cartSummaryPanel">
+            <h2 class="summary-title">Order Summary</h2>
+            <div class="summary-row">
+                <span>Total Items</span>
+                <span id="summaryCount">0</span>
+            </div>
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="summarySubtotal">₹0</span>
+            </div>
+            <div class="summary-row">
+                <span>Shipping</span>
+                <span>Free</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total</span>
+                <span id="summaryTotal">₹0</span>
+            </div>
+            <button class="checkout-btn" onclick="proceedToCheckout()">Proceed to Checkout</button>
+        </aside>
+    </div>
+
+    <!-- TOAST INJECTION -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="auth.js"></script>
+    <script>
+        let cartItems = [];
+
+        function loadCart() {
+            cartItems = JSON.parse(localStorage.getItem('hc_cart_items') || '[]');
+            renderCart();
+            updateSummary();
+            
+            // Pop the badge animation
+            const badge = document.querySelector('.global-cart-badge');
+            if(badge) {
+                badge.style.transform = 'scale(1.4)';
+                setTimeout(() => badge.style.transform = 'scale(1)', 200);
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem('hc_cart_items', JSON.stringify(cartItems));
+            updateSummary();
+            if (typeof syncCartBadge === 'function') syncCartBadge();
+        }
+
+        function formatPrice(p) { return `₹${Number(p).toLocaleString('en-IN')}`; }
+
+        function renderCart() {
+            const container = document.getElementById('cartItemsContainer');
+            const summaryPanel = document.getElementById('cartSummaryPanel');
+            
+            if (cartItems.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-icon">🛒</div>
+                        <h2>Your cart is empty</h2>
+                        <p>Looks like you haven't added anything to your cart yet.</p>
+                        <a href="home.html" class="btn-primary" style="display:inline-block;">Continue Shopping</a>
+                    </div>
+                `;
+                summaryPanel.style.display = 'none';
+                return;
+            }
+
+            summaryPanel.style.display = 'block';
+            container.innerHTML = cartItems.map((item, index) => {
+                const qty = item.qty || 1;
+                const custHtml = item.customization ? `<div class="item-cust">✨ Customization: ${item.customization}</div>` : '';
+                return `
+                    <div class="cart-item">
+                        <button class="remove-btn" title="Remove Item" onclick="removeItem(${index})">✕</button>
+                        <img src="${item.img}" alt="${item.name}" class="item-img" />
+                        <div class="item-details">
+                            <div>
+                                <h3 class="item-name">${item.name}</h3>
+                                <p class="item-desc">${item.desc || 'Beautiful carefully crafted product.'}</p>
+                                ${custHtml}
+                            </div>
+                            <div class="item-bottom">
+                                <span class="item-price">${formatPrice(item.price)}</span>
+                                <div class="qty-controls">
+                                    <button class="qty-btn" onclick="changeQty(${index}, -1)" aria-label="Decrease quantity">−</button>
+                                    <span class="qty-val">${qty}</span>
+                                    <button class="qty-btn" onclick="changeQty(${index}, 1)" aria-label="Increase quantity">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function changeQty(index, delta) {
+            let currentQty = cartItems[index].qty || 1;
+            let newQty = currentQty + delta;
+            
+            if (newQty < 1) newQty = 1;
+            
+            if (currentQty !== newQty) {
+                cartItems[index].qty = newQty;
+                saveCart();
+                renderCart();
+            } else if (delta < 0) {
+                showToast("Quantity cannot be less than 1. Use the remove button '✕' to delete.");
+            }
+        }
+
+        function removeItem(index) {
+            cartItems.splice(index, 1);
+            saveCart();
+            renderCart();
+            showToast("Item removed from cart 🗑️");
+        }
+
+        function updateSummary() {
+            const totalQty = cartItems.reduce((sum, item) => sum + (item.qty || 1), 0);
+            const totalPrice = cartItems.reduce((sum, item) => sum + (Number(item.price) * (item.qty || 1)), 0);
+            
+            document.getElementById('summaryCount').textContent = totalQty;
+            document.getElementById('summarySubtotal').textContent = formatPrice(totalPrice);
+            document.getElementById('summaryTotal').textContent = formatPrice(totalPrice);
+        }
+
+        function proceedToCheckout() {
+            showToast("Preparing secure checkout...");
+            
+            // Set currentOrder context that havenCraft might use
+            const currentOrder = {
+                items: cartItems,
+                date: new Date().toLocaleString(),
+                total: cartItems.reduce((sum, item) => sum + (Number(item.price) * (item.qty || 1)), 0)
+            };
+            localStorage.setItem('currentOrder', JSON.stringify(currentOrder));
+            
+            // Wait shortly for toast, then simulate successful checkout directly per success logic
+            // (Often this would go to payment.html, but if it doesn't exist we verify via success.html)
+            setTimeout(() => {
+                window.location.href = 'payment.html';
+            }, 800);
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            clearTimeout(t.tid);
+            t.tid = setTimeout(() => t.classList.remove('show'), 2800);
+        }
+
+        // Initialize display
+        document.addEventListener('DOMContentLoaded', loadCart);
+
+        // Optional cross-tab syncing specifically for the cart page UI
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'hc_cart_items') {
+                loadCart(); // Dynamically re-render the entire cart block if changed elsewhere!
+            }
+        });
+    </script>
+</body>
+</html>

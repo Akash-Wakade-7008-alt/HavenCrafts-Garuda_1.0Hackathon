@@ -415,8 +415,8 @@
     ============================================= */
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 28px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 32px;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -1237,18 +1237,27 @@
                 const img = card.querySelector('.card-img-wrap img').src;
                 
                 let cartItems = JSON.parse(localStorage.getItem('hc_cart_items') || '[]');
-                cartItems.push({
-                    name: name,
-                    price: price,
-                    img: img,
-                    id: 'p' + Date.now()
-                });
+                const existingIndex = cartItems.findIndex(i => i.name === name);
+                
+                if (existingIndex > -1) {
+                    cartItems[existingIndex].qty = (cartItems[existingIndex].qty || 1) + 1;
+                } else {
+                    cartItems.push({
+                        name: name,
+                        price: price,
+                        img: img,
+                        desc: card.querySelector('.card-desc').textContent,
+                        id: 'p' + Date.now(),
+                        qty: 1
+                    });
+                }
                 localStorage.setItem('hc_cart_items', JSON.stringify(cartItems));
                 
                 // Update badges
+                const totalQty = cartItems.reduce((sum, item) => sum + (item.qty || 1), 0);
                 [document.getElementById('cartBadge'), document.getElementById('mobileCartBadge')].forEach(badge => {
                     if (badge) {
-                        badge.textContent = cartItems.length;
+                        badge.textContent = totalQty;
                         badge.style.transform = 'scale(1.4)';
                         setTimeout(() => badge.style.transform = 'scale(1)', 200);
                     }
@@ -1261,8 +1270,9 @@
         // init cart badge count
         document.addEventListener('DOMContentLoaded', () => {
              let cartItems = JSON.parse(localStorage.getItem('hc_cart_items') || '[]');
+             const totalQty = cartItems.reduce((sum, item) => sum + (item.qty || 1), 0);
              [document.getElementById('cartBadge'), document.getElementById('mobileCartBadge')].forEach(badge => {
-                 if (badge) badge.textContent = cartItems.length;
+                 if (badge) badge.textContent = totalQty;
              });
         });
 

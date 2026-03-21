@@ -248,7 +248,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             const syncCartBadge = () => {
                 let cartItems = JSON.parse(localStorage.getItem('hc_cart_items') || '[]');
-                document.querySelectorAll('.global-cart-badge').forEach(b => b.textContent = cartItems.length);
+                const totalQty = cartItems.reduce((sum, item) => sum + (item.qty || 1), 0);
+                document.querySelectorAll('.global-cart-badge').forEach(b => b.textContent = totalQty);
             };
             syncCartBadge();
             window.addEventListener('storage', (e) => { if (e.key === 'hc_cart_items') syncCartBadge(); });

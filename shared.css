@@ -253,14 +253,14 @@ body {
 /* ================= PRODUCT GRID ================= */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 32px;
 }
 
 @media (min-width: 1400px) {
     .product-grid {
-        grid-template-columns: repeat(7, 1fr);
-        gap: 20px;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 28px;
     }
 }
 
@@ -327,9 +327,9 @@ body {
 }
 
 .card-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .btn {

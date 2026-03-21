@@ -137,8 +137,9 @@ function handleLogout(e) {
 // Sync Cart Badge dynamically
 function syncCartBadge() {
     let cartItems = JSON.parse(localStorage.getItem('hc_cart_items') || '[]');
+    const totalQty = cartItems.reduce((sum, item) => sum + (item.qty || 1), 0);
     document.querySelectorAll('.global-cart-badge, #cartBadge, #mobileCartBadge').forEach(badge => {
-        badge.textContent = cartItems.length;
+        badge.textContent = totalQty;
     });
 }
 

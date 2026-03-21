@@ -757,9 +757,8 @@
         <a href="index.html" class="nav-logo">HavenCraft</a>
         <ul class="nav-links">
             <li><a href="home.html">Home</a></li>
-            <li><a href="#decor">Decor</a></li>
+            <li><a href="#decor">Home Decor</a></li>
             <li><a href="#gifts">Gifts</a></li>
-            <li><a href="#decor">Customize</a></li>
             <li><a href="#footer">Contact</a></li>
         </ul>
         <div class="nav-right">
@@ -1086,7 +1085,7 @@
       <div class="card-desc">${p.desc}</div>
       <div class="card-price">${p.price}</div>
       <div class="card-btns">
-        <button class="btn btn-buy buy-btn">Buy Now</button>
+        <button class="btn btn-buy buy-btn">Add to Cart</button>
         <button class="btn btn-cust cust-btn">Customize</button>
       </div>
     </div>
@@ -1208,11 +1207,11 @@
 
         /* ───────────── DELEGATED CARD EVENTS ───────────── */
         document.addEventListener('click', e => {
-            // Buy Now button
+            // Add to Cart button
             if (e.target.classList.contains('buy-btn')) {
                 e.stopPropagation();
                 const card = e.target.closest('.card');
-                buyNow({
+                addToCart({
                     name: card.dataset.name,
                     img: card.dataset.img,
                     desc: card.dataset.desc,

@@ -214,8 +214,12 @@
 
 <body>
 
-    <header class="checkout-header">
-        <a href="home.html" class="logo">HavenCraft</a>
+    <header class="checkout-header" style="display:flex;justify-content:space-between;align-items:center;padding:24px 6%;">
+        <div style="width: 24px;"></div> <!-- Spacer -->
+        <a href="home.html" class="logo" style="margin: 0 auto;">HavenCraft</a>
+        <a href="cart.html" style="text-decoration: none; position: relative; font-size: 1.4rem; color: var(--text-dark);">
+            🛒<span class="global-cart-badge" style="position: absolute; top: -4px; right: -8px; background: var(--rose, #d4907e); color: #fff; font-size: 0.65rem; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">0</span>
+        </a>
     </header>
 
     <canvas id="confetti"></canvas>
@@ -242,6 +246,13 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const syncCartBadge = () => {
+                let cartItems = JSON.parse(localStorage.getItem('hc_cart_items') || '[]');
+                document.querySelectorAll('.global-cart-badge').forEach(b => b.textContent = cartItems.length);
+            };
+            syncCartBadge();
+            window.addEventListener('storage', (e) => { if (e.key === 'hc_cart_items') syncCartBadge(); });
+            
             const orders = JSON.parse(localStorage.getItem('orders') || '[]');
             const latestOrder = orders.length ? orders[orders.length - 1] : null;
 

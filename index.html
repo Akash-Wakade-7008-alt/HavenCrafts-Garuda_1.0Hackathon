@@ -958,6 +958,10 @@
     <nav id="navbar" aria-label="Main navigation">
         <a href="#hero" class="nav-logo">HavenCraft</a>
         <div class="nav-actions">
+            <!-- Add to Cart Badge -->
+            <button class="btn btn-outline cart-btn" id="cartBtn" aria-label="View cart" onclick="window.location.href='cart.html'" style="padding: 10px 14px; position: relative; font-size: 1.2rem; border: none;">
+                🛒<span id="cartBadge" style="position: absolute; top: -4px; right: -6px; background: var(--rose); color: #fff; font-size: 0.65rem; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 0.2s;">0</span>
+            </button>
             <a href="login.html" class="btn btn-outline" id="loginBtn">Login</a>
             <a href="signup.html" class="btn btn-primary" id="signupBtn">Sign Up</a>
         </div>
@@ -968,6 +972,7 @@
 
     <!-- Mobile Nav -->
     <div class="mobile-nav" id="mobileNav">
+        <a href="./cart.html" class="btn btn-outline" id="mobileCartBtn">🛒 Cart (<span id="mobileCartBadge">0</span>)</a>
         <a href="./login.html" class="btn btn-outline" id="mobileLoginBtn">Login</a>
         <a href="./signup.html" class="btn btn-primary" id="mobileSignupBtn">Sign Up</a>
     </div>
@@ -1184,7 +1189,7 @@
             <div class="card-desc">${product.desc}</div>
             <div class="card-price">${product.price}</div>
             <div class="card-actions">
-              <button class="btn btn-rose action-btn" aria-label="Buy ${product.name}">Buy Now</button>
+              <button class="btn btn-rose action-btn add-cart-btn" aria-label="Add to cart ${product.name}">Add to Cart</button>
               <button class="btn btn-ghost action-btn" aria-label="Customize ${product.name}">Customize</button>
             </div>
           </div>
@@ -1223,7 +1228,42 @@
 
         /* Delegate card button clicks */
         document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('add-cart-btn')) {
+                e.stopPropagation();
+                const card = e.target.closest('.product-card');
+                const name = card.querySelector('.card-name').textContent;
+                const priceStr = card.querySelector('.card-price').textContent;
+                const price = parseInt(priceStr.replace(/[^0-9]/g, ''));
+                const img = card.querySelector('.card-img-wrap img').src;
+                
+                let cartItems = JSON.parse(localStorage.getItem('hc_cart_items') || '[]');
+                cartItems.push({
+                    name: name,
+                    price: price,
+                    img: img,
+                    id: 'p' + Date.now()
+                });
+                localStorage.setItem('hc_cart_items', JSON.stringify(cartItems));
+                
+                // Update badges
+                [document.getElementById('cartBadge'), document.getElementById('mobileCartBadge')].forEach(badge => {
+                    if (badge) {
+                        badge.textContent = cartItems.length;
+                        badge.style.transform = 'scale(1.4)';
+                        setTimeout(() => badge.style.transform = 'scale(1)', 200);
+                    }
+                });
+                return;
+            }
             if (e.target.classList.contains('action-btn')) openModal();
+        });
+
+        // init cart badge count
+        document.addEventListener('DOMContentLoaded', () => {
+             let cartItems = JSON.parse(localStorage.getItem('hc_cart_items') || '[]');
+             [document.getElementById('cartBadge'), document.getElementById('mobileCartBadge')].forEach(badge => {
+                 if (badge) badge.textContent = cartItems.length;
+             });
         });
 
         /* ---- Navbar scroll effect ---- */

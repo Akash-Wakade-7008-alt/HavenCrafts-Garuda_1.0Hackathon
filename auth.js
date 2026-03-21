@@ -134,7 +134,20 @@ function handleLogout(e) {
     }, 800);
 }
 
+// Sync Cart Badge dynamically
+function syncCartBadge() {
+    let cartItems = JSON.parse(localStorage.getItem('hc_cart_items') || '[]');
+    document.querySelectorAll('.global-cart-badge, #cartBadge, #mobileCartBadge').forEach(badge => {
+        badge.textContent = cartItems.length;
+    });
+}
+
+window.addEventListener('storage', (e) => {
+    if (e.key === 'hc_cart_items') syncCartBadge();
+});
+
 // Listen globally
 document.addEventListener('DOMContentLoaded', () => {
     updateAuthUI();
+    syncCartBadge();
 });

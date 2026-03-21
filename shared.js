@@ -59,13 +59,28 @@ function addToCart(p = null) {
   if (!prod) prod = activeProd;
   if (!prod) return;
 
-  cartItems.push({
-    name: prod.name,
-    price: prod.price,
-    img: prod.img,
-    id: prod.id || ('p' + Date.now())
-  });
-  cartCount = cartItems.length;
+  let custStr = null;
+  const cData = JSON.parse(localStorage.getItem('customizationData'));
+  if (cData && cData.product === prod.name) {
+    custStr = cData.options || cData.customization;
+  }
+
+  const existingIndex = cartItems.findIndex(i => i.name === prod.name && i.customization === custStr);
+  if (existingIndex > -1) {
+    cartItems[existingIndex].qty = (cartItems[existingIndex].qty || 1) + 1;
+  } else {
+    cartItems.push({
+      name: prod.name,
+      price: prod.price,
+      img: prod.img,
+      desc: prod.desc || 'Beautiful carefully crafted product.',
+      customization: custStr,
+      id: prod.id || ('p' + Date.now()),
+      qty: 1
+    });
+  }
+
+  cartCount = cartItems.reduce((sum, item) => sum + (item.qty || 1), 0);
   localStorage.setItem('hc_cart_items', JSON.stringify(cartItems));
   updateCartBadge();
   showToast('Added to cart 🛒');
@@ -114,7 +129,14 @@ function showToast(msg) {
 // 5. Global UI Injection (Header, Footer, Modals)
 function injectGlobalUI() {
   // HEADER
-  const headerHtml = ``;
+  const headerHtml = `
+    <div class="fixed-cart-ui" style="position: fixed; top: 24px; right: 28px; z-index: 1000;">
+      <a href="cart.html" style="text-decoration: none; position: relative; display: flex; align-items: center; justify-content: center; background: #fff; width: 48px; height: 48px; border-radius: 50%; box-shadow: 0 6px 16px rgba(0,0,0,0.08); border: 1px solid var(--border, #e8e0d5); transition: transform 0.2s ease;">
+        <span style="font-size: 1.4rem;">🛒</span>
+        <span id="cartBadge" style="position: absolute; top: -4px; right: -4px; background: var(--rose, #d4907e); color: #fff; font-size: 0.75rem; font-weight: 700; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">0</span>
+      </a>
+    </div>
+  `;
 
   // FOOTER
   const footerHtml = `
@@ -168,7 +190,7 @@ function injectGlobalUI() {
           <div class="detail-price" id="dPrice"></div>
           <div class="detail-desc" id="dDesc"></div>
           <div class="detail-actions">
-            <button class="btn btn-buy" id="dBuyBtn" style="background:var(--sage);color:#fff;">🛒 Buy Now</button>
+            <button class="btn btn-buy" id="dBuyBtn" style="background:var(--sage);color:#fff;">🛒 Add to Cart</button>
             <button class="btn btn-cust" id="dAddCartBtn">➕ Add Cart</button>
             <button class="btn btn-cust" id="dCustBtn" style="grid-column: span 2;">✏️ Customize</button>
           </div>
@@ -347,7 +369,7 @@ function renderGrid(products) {
         <div class="card-name">${p.name}</div>
         <div class="card-price">${formatPrice(p.price)}</div>
         <div class="card-actions">
-          <button class="btn btn-buy" onclick="event.stopPropagation(); buyNow('${p.id}')">Buy Now</button>
+          <button class="btn btn-buy" onclick="event.stopPropagation(); buyNow('${p.id}')">Add to Cart</button>
           <button class="btn btn-cust" onclick="event.stopPropagation(); openCust('${p.id}')">Customize</button>
         </div>
       </div>

@@ -974,7 +974,7 @@
 
         /* ───────────── CART ───────────── */
         let cartItems = JSON.parse(localStorage.getItem('hc_cart_items') || '[]');
-        let cartCount = cartItems.length;
+        let cartCount = cartItems.reduce((sum, item) => sum + (item.qty || 1), 0);
         const badge = document.getElementById('cartBadge');
         if (badge) badge.textContent = cartCount;
 
@@ -988,27 +988,36 @@
         function addToCart(p = null) {
             if (!protectAction()) return;
             let prod = p;
-            // Fallback to activeProduct if nothing passed
             if (!prod) prod = activeProduct;
             if (!prod) return;
 
-            // Prepare base cart item
+            let numPrice = prod.price;
+            if (typeof numPrice === 'string') {
+                numPrice = parseInt(numPrice.replace(/[^0-9]/g, ''));
+            }
+
             let item = {
                 id: prod.id || prod.name,
                 name: prod.name,
-                price: prod.price,
+                price: numPrice,
                 img: prod.img,
                 desc: prod.desc || "",
                 qty: 1
             };
 
-            // Apply customization if exists
             if (typeof HC_Cust !== 'undefined') {
                 item = HC_Cust.attachToCartItem(item.id, item);
             }
 
-            cartItems.push(item);
-            cartCount = cartItems.length;
+            // Group by ID and Customization string
+            const existingIndex = cartItems.findIndex(i => i.id === item.id && i.customization === item.customization);
+            if (existingIndex > -1) {
+                cartItems[existingIndex].qty = (cartItems[existingIndex].qty || 1) + 1;
+            } else {
+                cartItems.push(item);
+            }
+
+            cartCount = cartItems.reduce((sum, item) => sum + (item.qty || 1), 0);
             localStorage.setItem('hc_cart_items', JSON.stringify(cartItems));
             updateBadge();
             showToast('Added to cart 🛒');

@@ -117,8 +117,8 @@ function updateAuthUI() {
 
     // Apply auto-fill logic if on payment.html
     if (user && window.location.pathname.includes('payment.html')) {
-        const fName = document.getElementById('fName');
-        const fEmail = document.getElementById('fEmail');
+        const fName = document.getElementById('fullName');
+        const fEmail = document.getElementById('email');
         // Only autofill if they are empty
         if (fName && !fName.value) fName.value = user.name;
         if (fEmail && !fEmail.value) fEmail.value = user.email;

@@ -1,349 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Success - HavenCraft</title>
+    <title>Order Success | HavenCraft</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap"
-        rel="stylesheet">
     <style>
         body {
-            background: var(--cream);
-            display: flex;
-            flex-direction: column;
+            background: linear-gradient(135deg, var(--beige) 0%, var(--cream) 100%);
             min-height: 100vh;
-            margin: 0;
+            display: flex;
             align-items: center;
             justify-content: center;
-            overflow-x: hidden;
-        }
-
-        .checkout-header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            padding: 24px 0;
-            background: var(--ww);
-            box-shadow: var(--sh);
-            z-index: 10;
-        }
-
-        .checkout-header .logo {
-            font-size: 2rem;
-            color: var(--saged);
-            text-decoration: none;
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 700;
+            padding: 20px;
         }
 
         .success-card {
             background: var(--ww);
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 48px;
             max-width: 500px;
-            width: 90%;
+            width: 100%;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-            position: relative;
-            z-index: 5;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-            margin-top: 80px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            animation: slideUp 0.6s ease-out;
         }
 
         @keyframes slideUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .icon-wrap {
+        .success-icon {
             width: 80px;
             height: 80px;
-            background: #e8f3e9;
+            background: rgba(138, 173, 143, 0.15);
+            color: var(--sage-dark);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 24px;
-            color: #4caf50;
             font-size: 2.5rem;
-            animation: popIn 0.5s 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+            margin: 0 auto 24px;
+            animation: popIn 0.5s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
         }
 
         @keyframes popIn {
-            0% {
-                transform: scale(0);
-            }
-
-            100% {
-                transform: scale(1);
-            }
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
-        .s-title {
+        h1 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.2rem;
             color: var(--dark);
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
-        .s-msg {
-            font-size: 0.95rem;
+        .success-sub {
             color: var(--mid);
-            line-height: 1.6;
+            font-size: 1.05rem;
             margin-bottom: 32px;
         }
 
         .order-details {
             background: var(--cream);
+            border: 1px solid var(--border);
             border-radius: 12px;
             padding: 24px;
             text-align: left;
             margin-bottom: 32px;
-            border: 1px dashed var(--border);
         }
 
-        .od-row {
+        .detail-row {
             display: flex;
             justify-content: space-between;
             margin-bottom: 12px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
-        .od-row:last-child {
+        .detail-row:last-child {
             margin-bottom: 0;
             padding-top: 12px;
-            border-top: 1px solid var(--border);
+            border-top: 1px dashed var(--border);
             font-weight: 600;
             color: var(--dark);
-            font-size: 1.05rem;
         }
 
-        .od-label {
-            color: var(--light);
+        .detail-label {
+            color: var(--mid);
         }
 
-        .od-val {
+        .detail-value {
             color: var(--dark);
             font-weight: 500;
-            text-align: right;
         }
 
         .est-delivery {
             font-size: 0.85rem;
-            color: var(--saged);
+            color: var(--sage-dark);
             background: rgba(138, 173, 143, 0.1);
-            padding: 8px 16px;
-            border-radius: 50px;
+            padding: 8px 12px;
+            border-radius: 6px;
             display: inline-block;
             margin-bottom: 32px;
             font-weight: 500;
         }
 
-        .btn-group {
-            display: flex;
-            gap: 16px;
-            flex-direction: column;
-        }
-
-        .btn-main,
-        .btn-sec {
+        .btn-home {
+            display: inline-flex;
+            width: 100%;
             padding: 16px;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all var(--tr);
-        }
-
-        .btn-main {
-            background: var(--sage);
+            font-size: 1.05rem;
+            background: linear-gradient(135deg, var(--sage), var(--saged));
             color: #fff;
             border: none;
-            box-shadow: 0 8px 20px rgba(94, 131, 99, 0.25);
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
         }
 
-        .btn-main:hover {
-            background: var(--saged);
+        .btn-home:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 24px rgba(94, 131, 99, 0.35);
-        }
-
-        .btn-sec {
-            background: transparent;
-            border: 1.5px solid var(--border);
-            color: var(--mid);
-        }
-
-        .btn-sec:hover {
-            border-color: var(--sage);
-            color: var(--saged);
-        }
-
-        /* Confetti Canvas */
-        #confetti {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1000;
+            box-shadow: 0 8px 24px rgba(94, 131, 99, 0.35);
         }
 
         @media (max-width: 600px) {
             .success-card {
-                padding: 32px 20px;
-            }
-
-            .s-title {
-                font-size: 1.8rem;
+                padding: 32px 24px;
             }
         }
     </style>
 </head>
-
 <body>
 
-    <header class="checkout-header" style="display:flex;justify-content:space-between;align-items:center;padding:24px 6%;">
-        <div style="width: 24px;"></div> <!-- Spacer -->
-        <a href="home.html" class="logo" style="margin: 0 auto;">HavenCraft</a>
-        <a href="cart.html" style="text-decoration: none; position: relative; font-size: 1.4rem; color: var(--text-dark);">
-            🛒<span class="global-cart-badge" style="position: absolute; top: -4px; right: -8px; background: var(--rose, #d4907e); color: #fff; font-size: 0.65rem; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">0</span>
-        </a>
-    </header>
-
-    <canvas id="confetti"></canvas>
-
     <div class="success-card">
-        <div class="icon-wrap">✓</div>
-        <h1 class="s-title">Order Placed Successfully!</h1>
-        <p class="s-msg">Thank you for your order. Your customized products are being crafted with love and care.</p>
+        <div class="success-icon">✓</div>
+        <h1>Order Placed Successfully!</h1>
+        <p class="success-sub">Thank you for shopping with HavenCraft. Your order is being processed.</p>
+        
+        <div id="estDelivery" class="est-delivery"></div>
 
-        <div class="est-delivery">📦 Estimated delivery: 3–5 days</div>
-
-        <div class="order-details" id="orderDetails">
-            <!-- Injected via JS -->
-            <p style="color:var(--mid);text-align:center;">Loading details...</p>
+        <div class="order-details" id="orderDetailsBlock">
+            <!-- details populated via JS -->
         </div>
 
-        <div class="btn-group">
-            <a href="home.html" class="btn-main">Continue Shopping</a>
-            <a href="#" class="btn-sec"
-                onclick="alert('Tracking details will be emailed to you shortly.'); event.preventDefault();">Track
-                Order</a>
-        </div>
+        <a href="home.html" class="btn-home">Continue Shopping</a>
     </div>
 
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <script src="auth.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const syncCartBadge = () => {
-                let cartItems = JSON.parse(localStorage.getItem('hc_cart_items') || '[]');
-                const totalQty = cartItems.reduce((sum, item) => sum + (item.qty || 1), 0);
-                document.querySelectorAll('.global-cart-badge').forEach(b => b.textContent = totalQty);
-            };
-            syncCartBadge();
-            window.addEventListener('storage', (e) => { if (e.key === 'hc_cart_items') syncCartBadge(); });
-            
-            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
-            const latestOrder = orders.length ? orders[orders.length - 1] : null;
-
-            const odContainer = document.getElementById('orderDetails');
-
-            if (latestOrder) {
-                let itemCount = 0;
-                if (Array.isArray(latestOrder.items)) {
-                    itemCount = latestOrder.items.length;
-                } else {
-                    itemCount = latestOrder.items || 1;
-                }
-
-                odContainer.innerHTML = `
-          <div class="od-row">
-            <span class="od-label">Order ID</span>
-            <span class="od-val">#${latestOrder.orderId}</span>
-          </div>
-          <div class="od-row">
-            <span class="od-label">Date & Time</span>
-            <span class="od-val">${latestOrder.date}</span>
-          </div>
-          <div class="od-row">
-            <span class="od-label">Items</span>
-            <span class="od-val">${itemCount} item(s)</span>
-          </div>
-          <div class="od-row">
-            <span class="od-label">Total Amount</span>
-            <span class="od-val">₹${latestOrder.total.toLocaleString('en-IN')}</span>
-          </div>
-        `;
-            } else {
-                odContainer.innerHTML = `<p style="color:var(--rose);text-align:center;">No recent order found.</p>`;
-            }
-
-            // Start Confetti
-            fireConfetti();
-        });
-
-        // ----- Tiny Confetti Script -----
-        function fireConfetti() {
-            const cvs = document.getElementById('confetti');
-            const ctx = cvs.getContext('2d');
-            cvs.width = window.innerWidth;
-            cvs.height = window.innerHeight;
-
-            const pieces = [];
-            const colors = ['#8aad8f', '#d4907e', '#f2ebe0', '#5e8363', '#e8e0d5'];
-
-            for (let i = 0; i < 150; i++) {
-                pieces.push({
-                    x: Math.random() * cvs.width,
-                    y: Math.random() * cvs.height - cvs.height,
-                    w: Math.random() * 10 + 5,
-                    h: Math.random() * 5 + 5,
-                    color: colors[Math.floor(Math.random() * colors.length)],
-                    speedY: Math.random() * 3 + 2,
-                    speedX: Math.random() * 2 - 1,
-                    rot: Math.random() * 360,
-                    rotSpeed: Math.random() * 5 - 2.5
-                });
-            }
-
-            function render() {
-                ctx.clearRect(0, 0, cvs.width, cvs.height);
-                let active = false;
-                pieces.forEach(p => {
-                    p.y += p.speedY;
-                    p.x += p.speedX;
-                    p.rot += p.rotSpeed;
-                    if (p.y < cvs.height) active = true;
-
-                    ctx.save();
-                    ctx.translate(p.x, p.y);
-                    ctx.rotate(p.rot * Math.PI / 180);
-                    ctx.fillStyle = p.color;
-                    ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-                    ctx.restore();
-                });
-                if (active) requestAnimationFrame(render);
-            }
-            render();
+        function formatPrice(num) {
+            return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(num);
         }
 
-        window.addEventListener('resize', () => {
-            const cvs = document.getElementById('confetti');
-            cvs.width = window.innerWidth;
-            cvs.height = window.innerHeight;
-        });
+        function initSuccess() {
+            try {
+                const orderData = localStorage.getItem('hc_current_order');
+                if (!orderData) {
+                    window.location.replace('home.html');
+                    return;
+                }
+
+                const order = JSON.parse(orderData);
+                
+                // Display Details
+                const block = document.getElementById('orderDetailsBlock');
+                block.innerHTML = `
+                    <div class="detail-row">
+                        <span class="detail-label">Order ID</span>
+                        <span class="detail-value">${order.orderId}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Deliver To</span>
+                        <span class="detail-value">${order.deliveryDetails.fullName}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Payment Method</span>
+                        <span class="detail-value">${order.paymentMethod === 'Card' ? 'Credit/Debit Card' : order.paymentMethod}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Items</span>
+                        <span class="detail-value">${order.items.reduce((sum, item) => sum + (item.qty || 1), 0)} items</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Total Amount</span>
+                        <span class="detail-value">${formatPrice(order.totalAmount)}</span>
+                    </div>
+                `;
+
+                // Calculate Est. Delivery (Order Date + 3-5 days)
+                const d = new Date(order.orderDate);
+                const minDel = new Date(d);
+                minDel.setDate(minDel.getDate() + 3);
+                const maxDel = new Date(d);
+                maxDel.setDate(maxDel.getDate() + 5);
+                
+                const formatOpts = { month: 'short', day: 'numeric' };
+                document.getElementById('estDelivery').textContent = 
+                    `🚚 Estimated Delivery: ${minDel.toLocaleDateString('en-IN', formatOpts)} - ${maxDel.toLocaleDateString('en-IN', formatOpts)}`;
+
+            } catch(e) {
+                console.error('Error parsing order data', e);
+                window.location.replace('home.html');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initSuccess);
     </script>
 </body>
-
 </html>

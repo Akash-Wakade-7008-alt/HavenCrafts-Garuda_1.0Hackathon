@@ -276,21 +276,13 @@
         }
 
         function proceedToCheckout() {
-            showToast("Preparing secure checkout...");
+            if (cartItems.length === 0) {
+                showToast("Your cart is empty.");
+                return;
+            }
             
-            // Set currentOrder context that havenCraft might use
-            const currentOrder = {
-                items: cartItems,
-                date: new Date().toLocaleString(),
-                total: cartItems.reduce((sum, item) => sum + (Number(item.price) * (item.qty || 1)), 0)
-            };
-            localStorage.setItem('currentOrder', JSON.stringify(currentOrder));
-            
-            // Wait shortly for toast, then simulate successful checkout directly per success logic
-            // (Often this would go to payment.html, but if it doesn't exist we verify via success.html)
-            setTimeout(() => {
-                window.location.href = 'payment.html';
-            }, 800);
+            // Redirect to the new payment flow
+            window.location.href = 'payment.html';
         }
 
         function showToast(msg) {

@@ -10,7 +10,6 @@
   <img src="https://img.shields.io/badge/Status-Active-success?style=for-the-badge" />
 </p>
 
-
 ---
 
 ## Overview
@@ -23,7 +22,7 @@ It focuses on clarity, predictable behavior, and a smooth user journey—without
 
 ## System Flow
 
-Home → Product → Cart → Checkout → Payment → Confirmation  
+Home → Product → Cart → Checkout → Payment → Confirmation
 
 Each transition is explicit.  
 Each state is persisted.  
@@ -46,26 +45,37 @@ Example: https://your-site-link.com
 
 ---
 
+## Local Setup
+
+git clone https://github.com/your-username/HevanCraft.git  
+cd HevanCraft
+
+## Run Locally
+
+Open `home.html` in any modern browser.
+
+---
+
 ## Core Behavior
 
-- Deterministic cart state using Local Storage  
-- Immediate UI feedback on every interaction  
-- Stateless pages connected through shared storage  
-- Linear, uninterrupted checkout flow  
-- Clear separation of structure, logic, and state  
+- Deterministic cart state using Local Storage
+- Immediate UI feedback on every interaction
+- Stateless pages connected through shared storage
+- Linear, uninterrupted checkout flow
+- Clear separation of structure, logic, and state
 
 ---
 
 ## Features
 
-- Clean and minimal product browsing  
-- Product customization with persistent data  
-- Dynamic cart with real-time updates  
-- Quantity control within cart  
-- Structured checkout with delivery form  
-- Order summary with pricing breakdown  
-- Multiple payment interface options  
-- Order confirmation flow  
+- Clean and minimal product browsing
+- Product customization with persistent data
+- Dynamic cart with real-time updates
+- Quantity control within cart
+- Structured checkout with delivery form
+- Order summary with pricing breakdown
+- Multiple payment interface options
+- Order confirmation flow
 
 ---
 
@@ -73,17 +83,17 @@ Example: https://your-site-link.com
 
 The system is intentionally framework-free.
 
-- **Structure:** HTML  
-- **Presentation:** CSS  
-- **Logic:** Vanilla JavaScript  
-- **Persistence:** Local Storage  
+- **Structure:** HTML
+- **Presentation:** CSS
+- **Logic:** Vanilla JavaScript
+- **Persistence:** Local Storage
 
 Small, transparent, and easy to reason about.
 
 ---
 
 ## Project Structure
-
+```
 HevanCraft/
 │
 ├── home.html  
@@ -92,25 +102,25 @@ HevanCraft/
 ├── success.html  
 │
 ├── css/  
-│   └── style.css  
+│ └── style.css  
 │
 ├── js/  
-│   ├── script.js  
-│   ├── cart.js  
-│   └── payment.js  
+│ ├── script.js  
+│ ├── cart.js  
+│ └── payment.js  
 │
 ├── assets/  
-│   ├── images/  
-│   └── icons/  
+│ ├── images/  
+│ └── icons/  
 │
-└── README.md  
-
+└── README.md
+```
 ---
 
 ## Getting Started
 
 git clone https://github.com/your-username/HevanCraft.git  
-cd HevanCraft  
+cd HevanCraft
 
 Open `home.html` in your browser.
 
@@ -118,20 +128,20 @@ Open `home.html` in your browser.
 
 ## Design Philosophy
 
-- Simplicity over complexity  
-- Clear and predictable user flow  
-- Minimal UI with focused interactions  
-- Functional design over visual noise  
+- Simplicity over complexity
+- Clear and predictable user flow
+- Minimal UI with focused interactions
+- Functional design over visual noise
 
 ---
 
 ## Future Direction
 
-- Authentication system  
-- Backend integration (Node.js / Firebase)  
-- Payment gateway integration  
-- Responsive, mobile-first design  
-- Intelligent product recommendations  
+- Authentication system
+- Backend integration (Node.js / Firebase)
+- Payment gateway integration
+- Responsive, mobile-first design
+- Intelligent product recommendations
 
 ---
 
@@ -139,26 +149,14 @@ Open `home.html` in your browser.
 
 Contributions are welcome.
 
-1. Fork the repository  
-2. Create a feature branch  
-3. Commit your changes  
-4. Open a pull request  
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Open a pull request
 
 ---
 
 ## Author
 
 Akash Wakade  
-B.Tech CSE (AI) | Web Developer  
-
----
-
-## License
-
-MIT License  
-
----
-
-<p align="center">
-  Built with attention to detail
-</p>
+B.Tech CSE (AI) | Web Developer

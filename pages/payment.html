@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout | HavenCraft</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="shared.css" />
+    <link rel="stylesheet" href="./payment.css" />
+  </head>
+  <body>
+    <!-- CHECKOUT HEADER -->
+    <header class="checkout-header">
+      <a href="cart.html" class="back-link"> ← <span>Back to Cart</span> </a>
+      <a href="home.html" class="checkout-logo">HavenCraft</a>
+      <div class="secure-badge">🔒 Secure Checkout</div>
+    </header>
+
+    <!-- CHECKOUT CONTENT -->
+    <main class="checkout-container" id="mainContainer">
+      <!-- Delivery Form -->
+      <div class="checkout-panel">
+        <h2 class="panel-title">Delivery Information</h2>
+
+        <form id="checkoutForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" placeholder="Jane Doe" />
+              <div class="error-msg">Please enter a valid name.</div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                placeholder="9876543210"
+                maxlength="10"
+              />
+              <div class="error-msg">Please enter a valid 10-digit number.</div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="jane@example.com" />
+              <div class="error-msg">Please enter a valid email address.</div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="address1">Address Line 1</label>
+              <input
+                type="text"
+                id="address1"
+                placeholder="Flat No. / House No. / Building"
+              />
+              <div class="error-msg">Address is required.</div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="address2">Address Line 2 (Optional)</label>
+              <input
+                type="text"
+                id="address2"
+                placeholder="Street / Area / Landmark"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" id="city" placeholder="Mumbai" />
+              <div class="error-msg">City is required.</div>
+            </div>
+            <div class="form-group">
+              <label for="state">State</label>
+              <input type="text" id="state" placeholder="Maharashtra" />
+              <div class="error-msg">State is required.</div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="pincode">Pincode</label>
+              <input
+                type="text"
+                id="pincode"
+                placeholder="400001"
+                maxlength="6"
+              />
+              <div class="error-msg">Please enter a valid 6-digit pincode.</div>
+            </div>
+            <div class="form-group">
+              <label for="country">Country</label>
+              <select id="country">
+                <option value="India">India</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Order Summary & Payment -->
+      <div class="checkout-panel summary-panel">
+        <h2 class="panel-title">Order Summary</h2>
+
+        <div class="summary-items" id="summaryItems">
+          <!-- Rendered by JS -->
+        </div>
+
+        <div class="totals">
+          <div class="total-row">
+            <span>Subtotal</span>
+            <span id="subtotalAmount">₹0</span>
+          </div>
+          <div class="total-row">
+            <span>Shipping</span>
+            <span style="color: var(--sage-dark)">Free</span>
+          </div>
+          <div class="total-row grand-total">
+            <span>Total Amount</span>
+            <span id="totalAmount">₹0</span>
+          </div>
+        </div>
+
+        <h2 class="panel-title" style="margin-top: 32px; font-size: 1.4rem">
+          Payment Method
+        </h2>
+
+        <div class="payment-options">
+          <label class="payment-option selected">
+            <input type="radio" name="paymentMethod" value="COD" checked />
+            <span>Cash on Delivery (COD)</span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="UPI" />
+            <span>UPI (GPay, PhonePe, Paytm)</span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="Card" />
+            <span>Credit / Debit Card</span>
+          </label>
+        </div>
+
+        <button class="btn-checkout" id="placeOrderBtn">
+          <span class="loader"></span>
+          <div class="btn-content-wrapper">
+            <span class="btn-text">Place Order</span>
+            <svg
+              class="btn-icon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
+        </button>
+      </div>
+    </main>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <script src="auth.js"></script>
+    <script src="./payment.js"></script>
+  </body>
+</html>

@@ -1,0 +1,114 @@
+ /* Page-specific decorative illustration strip */
+        .auth-aside {
+            display: none;
+        }
+
+        @media (min-width: 960px) {
+            .auth-page {
+                padding-left: 0;
+            }
+
+            .auth-layout {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                min-height: 100vh;
+                width: 100%;
+            }
+
+            .auth-aside {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 32px;
+                padding: 80px 48px;
+                background: linear-gradient(160deg, #e8f0e8 0%, var(--beige) 60%, #f5ede3 100%);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .aside-blob {
+                position: absolute;
+                border-radius: 50%;
+                pointer-events: none;
+                filter: blur(60px);
+            }
+
+            .aside-blob-1 {
+                width: 300px;
+                height: 300px;
+                background: rgba(138, 173, 143, 0.25);
+                top: -60px;
+                right: -60px;
+            }
+
+            .aside-blob-2 {
+                width: 220px;
+                height: 220px;
+                background: rgba(212, 144, 126, 0.18);
+                bottom: -40px;
+                left: -40px;
+            }
+
+            .aside-content {
+                position: relative;
+                z-index: 1;
+                text-align: center;
+                max-width: 340px;
+            }
+
+            .aside-illustration {
+                width: 100%;
+                max-width: 300px;
+                height: 300px;
+                border-radius: 24px;
+                object-fit: cover;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+                margin-bottom: 32px;
+            }
+
+            .aside-title {
+                font-family: 'Cormorant Garamond', serif;
+                font-size: 1.9rem;
+                font-weight: 600;
+                color: var(--text-dark);
+                line-height: 1.25;
+                margin-bottom: 12px;
+            }
+
+            .aside-sub {
+                font-size: 0.88rem;
+                color: var(--text-mid);
+                line-height: 1.6;
+                font-weight: 300;
+            }
+
+            .aside-badges {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 24px;
+                flex-wrap: wrap;
+            }
+
+            .aside-badge {
+                background: var(--warm-white);
+                border: 1px solid var(--border);
+                color: var(--text-mid);
+                font-size: 0.75rem;
+                font-weight: 500;
+                padding: 6px 14px;
+                border-radius: 50px;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .auth-page-right {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 80px 40px;
+                background: var(--cream);
+            }
+        }

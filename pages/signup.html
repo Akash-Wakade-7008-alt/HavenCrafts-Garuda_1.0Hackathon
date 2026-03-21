@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Create your HavenCraft account and start customizing your perfect space." />
+    <title>Sign Up – HavenCraft</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="auth.css" />
+<link rel="stylesheet" href="./signup.css">
+</head>
+
+<body>
+
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-2"></div>
+    <div class="bg-blob bg-blob-3"></div>
+
+    <!-- Navbar -->
+    <nav class="auth-nav" style="display:flex;justify-content:space-between;align-items:center;padding:0 6%;">
+        <div style="width: 24px;"></div> <!-- Spacer -->
+        <a href="index.html" class="auth-nav-logo" style="margin:0 auto;">HavenCraft</a>
+        <a href="cart.html" style="text-decoration: none; position: relative; font-size: 1.4rem; color: var(--text-dark);">
+            🛒<span class="global-cart-badge" style="position: absolute; top: -4px; right: -8px; background: var(--rose, #d4907e); color: #fff; font-size: 0.65rem; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">0</span>
+        </a>
+    </nav>
+
+    <!-- Main -->
+    <main class="auth-page">
+        <div class="auth-layout">
+
+            <!-- Right illustration panel (desktop only) -->
+            <aside class="auth-aside">
+                <div class="aside-blob aside-blob-1"></div>
+                <div class="aside-blob aside-blob-2"></div>
+                <div class="aside-content">
+                    <div class="aside-gallery">
+                        <img src="https://images.unsplash.com/photo-1594060583572-e5c94e29b96c?w=300&q=80&auto=format&fit=crop"
+                            alt="Macramé wall art" />
+                        <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=300&q=80&auto=format&fit=crop"
+                            alt="Ceramic planter" />
+                        <img src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=300&q=80&auto=format&fit=crop"
+                            alt="Gift hamper" />
+                    </div>
+                    <h2 class="aside-title">Start Your<br /><em
+                            style="font-style:italic;color:var(--rose-dark)">Creative Journey</em></h2>
+                    <p class="aside-sub">Join thousands of happy customers who personalise their space with HavenCraft's
+                        handcrafted products.</p>
+                </div>
+            </aside>
+
+            <!-- Left form panel -->
+            <div class="auth-page-right">
+                <div class="auth-card" role="main" aria-label="Sign up form">
+
+                    <span class="auth-logo">HavenCraft</span>
+                    <h1 class="auth-title">Create Your Account</h1>
+                    <p class="auth-sub">Join HavenCraft and start customizing</p>
+
+                    <form class="auth-form" id="signupForm" novalidate>
+
+                        <!-- Full Name -->
+                        <div class="form-group" id="nameGroup">
+                            <label class="form-label" for="fullName">Full Name</label>
+                            <div class="input-wrap">
+                                <input class="form-input" type="text" id="fullName" name="fullName" autocomplete="name"
+                                    placeholder="Jane Doe" aria-describedby="nameError" aria-required="true" />
+                            </div>
+                            <span class="form-error" id="nameError" role="alert" aria-live="polite">
+                                ⚠ Full name is required.
+                            </span>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group" id="emailGroup">
+                            <label class="form-label" for="email">Email Address</label>
+                            <div class="input-wrap">
+                                <input class="form-input" type="email" id="email" name="email" autocomplete="email"
+                                    placeholder="you@example.com" aria-describedby="emailError" aria-required="true" />
+                            </div>
+                            <span class="form-error" id="emailError" role="alert" aria-live="polite">
+                                ⚠ Please enter a valid email address.
+                            </span>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-group" id="passwordGroup">
+                            <label class="form-label" for="password">Password</label>
+                            <div class="input-wrap">
+                                <input class="form-input" type="password" id="password" name="password"
+                                    autocomplete="new-password" placeholder="Min. 6 characters"
+                                    aria-describedby="passwordError passwordHint" aria-required="true" />
+                                <button type="button" class="eye-toggle" id="pwToggle"
+                                    aria-label="Show password">👁</button>
+                            </div>
+                            <span class="form-error" id="passwordError" role="alert" aria-live="polite">
+                                ⚠ Password must be at least 6 characters.
+                            </span>
+                            <!-- Strength meter -->
+                            <div class="strength-bar-wrap" id="strengthBars" aria-hidden="true">
+                                <div class="strength-seg" id="seg1"></div>
+                                <div class="strength-seg" id="seg2"></div>
+                                <div class="strength-seg" id="seg3"></div>
+                                <div class="strength-seg" id="seg4"></div>
+                            </div>
+                            <div class="strength-label" id="strengthLabel"></div>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="form-group" id="confirmGroup">
+                            <label class="form-label" for="confirmPassword">Confirm Password</label>
+                            <div class="input-wrap">
+                                <input class="form-input" type="password" id="confirmPassword" name="confirmPassword"
+                                    autocomplete="new-password" placeholder="Re-enter your password"
+                                    aria-describedby="confirmError" aria-required="true" />
+                                <button type="button" class="eye-toggle" id="cpwToggle"
+                                    aria-label="Show confirm password">👁</button>
+                            </div>
+                            <span class="form-error" id="confirmError" role="alert" aria-live="polite">
+                                ⚠ Passwords do not match.
+                            </span>
+                        </div>
+
+                        <!-- Submit -->
+                        <button type="submit" class="btn-submit" id="signupBtn">
+                            <div class="spinner"></div>
+                            <span class="btn-text">Create Account</span>
+                        </button>
+
+                    </form>
+
+                    <div class="auth-divider" style="margin-top:24px;">or</div>
+
+                    <p class="auth-switch">
+                        Already have an account? <a href="login.html">Login</a>
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="auth.js"></script>
+    <script src="./signup.js">
+       
+    </script>
+</body>
+
+</html>

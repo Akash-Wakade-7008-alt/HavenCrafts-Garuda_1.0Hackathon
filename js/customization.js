@@ -67,7 +67,7 @@ const HC_Cust = (() => {
         </div>
 
         <!-- Form fields (disabled until checkbox checked) -->
-        <div class="hc-cust-fields" id="hcCustFields">
+        <div class="hc-cust-fields disabled" id="hcCustFields">
           <!-- Name -->
           <div class="hc-cust-field-group">
             <label class="hc-cust-label" for="hcCustName">Name <span class="hc-cust-required">*</span></label>
@@ -75,7 +75,7 @@ const HC_Cust = (() => {
               type="text"
               id="hcCustName"
               class="hc-cust-input"
-              placeholder="Enter your name (min 2 characters)"
+              placeholder="Your name will appear here (min 2 chars)"
               disabled
               maxlength="80"
               autocomplete="off"
@@ -136,7 +136,10 @@ const HC_Cust = (() => {
           <button class="hc-cust-btn-danger" id="hcRemoveCustBtn" type="button" style="display:none">🗑️ Remove</button>
           <div class="hc-cust-footer-right">
             <button class="hc-cust-btn-cancel" id="hcCancelBtn" type="button">Cancel</button>
-            <button class="hc-cust-btn-save" id="hcSaveBtn" type="button" disabled>Save Customization ✓</button>
+            <button class="hc-cust-btn-save" id="hcSaveBtn" type="button" disabled>
+                <span class="hc-cust-save-text">Save Customization ✓</span>
+                <span class="hc-cust-loader" style="display:none;"></span>
+            </button>
           </div>
         </div>
       </div>
@@ -234,6 +237,11 @@ const HC_Cust = (() => {
       /* ── Fields ── */
       .hc-cust-fields {
         padding: 20px 24px; display: flex; flex-direction: column; gap: 20px;
+        transition: opacity 0.3s ease;
+      }
+      .hc-cust-fields.disabled {
+        opacity: 0.45;
+        pointer-events: none;
       }
       .hc-cust-field-group { display: flex; flex-direction: column; gap: 6px; }
       .hc-cust-label {
@@ -334,9 +342,18 @@ const HC_Cust = (() => {
         color: #fff; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
         cursor: pointer; box-shadow: 0 4px 12px rgba(94,131,99,0.35);
         transition: all 0.25s;
+        min-width: 160px;
+        display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+        position: relative; overflow: hidden;
       }
       .hc-cust-btn-save:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(94,131,99,0.45); }
-      .hc-cust-btn-save:disabled { background: #c0ccc0; box-shadow: none; cursor: not-allowed; }
+      .hc-cust-btn-save:disabled { background: #c0ccc0; box-shadow: none; cursor: not-allowed; opacity: 0.7; }
+      .hc-cust-loader {
+        width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.4);
+        border-top-color: #fff; border-radius: 50%;
+        animation: hcSpin 0.8s linear infinite;
+      }
+      @keyframes hcSpin { 100% { transform: rotate(360deg); } }
       .hc-cust-btn-danger {
         padding: 10px 18px; border-radius: 50px;
         border: 1.5px solid #e8e0d5; background: transparent;
@@ -403,13 +420,25 @@ const HC_Cust = (() => {
     // Enable checkbox toggle
     enableCb.addEventListener('change', function () {
       const enabled = this.checked;
+      const fieldsContainer = document.getElementById('hcCustFields');
+      if (enabled) {
+        fieldsContainer.classList.remove('disabled');
+      } else {
+        fieldsContainer.classList.add('disabled');
+      }
       [nameInput, imageInput, descArea].forEach(el => el.disabled = !enabled);
       confirmRow.style.display = enabled ? 'flex' : 'none';
       saveBtn.disabled = !enabled;
+
       if (!enabled) {
         // Reset errors
         _clearErrors();
+        confirmCb.checked = false;
         saveBtn.disabled = true;
+      } else {
+        // Active save button requirement
+        saveBtn.disabled = !confirmCb.checked;
+        setTimeout(() => nameInput.focus(), 50);
       }
     });
 
@@ -478,7 +507,10 @@ const HC_Cust = (() => {
       document.getElementById('hcImgPreview').src = _pendingBase64Image;
       document.getElementById('hcImgPreviewWrap').style.display = 'flex';
       document.getElementById('hcRemoveImg').style.display = 'inline-flex';
-      document.getElementById('hcUploadLabel').textContent = '✅ File selected';
+      
+      let fName = file.name;
+      if (fName.length > 20) fName = fName.substring(0, 20) + '...';
+      document.getElementById('hcUploadLabel').textContent = `✅ ${fName}`;
     };
     reader.readAsDataURL(file);
   }
@@ -546,6 +578,7 @@ const HC_Cust = (() => {
     // Reset form
     const enableCb = document.getElementById('hcEnableCb');
     enableCb.checked = false;
+    document.getElementById('hcCustFields').classList.add('disabled');
     ['hcCustName', 'hcCustDesc'].forEach(id => {
       const el = document.getElementById(id); if (el) { el.value = ''; el.disabled = true; el.classList.remove('error'); }
     });
@@ -603,25 +636,40 @@ const HC_Cust = (() => {
   function save() {
     if (!_validateAll()) return;
 
-    const name = document.getElementById('hcCustName').value.trim();
-    const description = document.getElementById('hcCustDesc').value.trim();
-    const image = _pendingBase64Image || (load(_activeProductId) || {}).image || null;
+    const saveBtn = document.getElementById('hcSaveBtn');
+    const loader = saveBtn.querySelector('.hc-cust-loader');
+    const textSpan = saveBtn.querySelector('.hc-cust-save-text');
+    
+    saveBtn.disabled = true;
+    if (loader) loader.style.display = 'inline-block';
+    if (textSpan) textSpan.style.display = 'none';
 
-    const data = {
-      name,
-      description,
-      image,
-      isCustomized: true,
-      updatedAt: Date.now()
-    };
+    setTimeout(() => {
+        const name = document.getElementById('hcCustName').value.trim();
+        const description = document.getElementById('hcCustDesc').value.trim();
+        const image = _pendingBase64Image || (load(_activeProductId) || {}).image || null;
 
-    _write(_activeProductId, data);
-    close();
-    _showToast('Customization Saved ✅');
-    refreshCardUI(_activeProductId);
+        const data = {
+          name,
+          description,
+          image,
+          isCustomized: true,
+          updatedAt: Date.now()
+        };
 
-    // Also update cart items for this product
-    _syncCartCustomization(_activeProductId, data);
+        _write(_activeProductId, data);
+        close();
+        _showToast('Customization Saved ✅');
+        refreshCardUI(_activeProductId);
+
+        // Also update cart items for this product
+        _syncCartCustomization(_activeProductId, data);
+
+        // Restore button state
+        saveBtn.disabled = false;
+        if (loader) loader.style.display = 'none';
+        if (textSpan) textSpan.style.display = 'inline-block';
+    }, 600); // Simulate brief network/save delay
   }
 
   /* ─── 11. Sync Cart ─── */

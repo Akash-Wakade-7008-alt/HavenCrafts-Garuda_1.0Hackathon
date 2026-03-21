@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>HavenCraft – Home</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./home.css" />
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav id="navbar">
+      <a href="index.html" class="nav-logo">HavenCraft</a>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="#decor">Home Decor</a></li>
+        <li><a href="#gifts">Gifts</a></li>
+        <li><a href="#footer">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <a
+          href="cart.html"
+          class="cart-btn"
+          id="cartBtn"
+          aria-label="View cart"
+          style="
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          🛒<span id="cartBadge">0</span>
+        </a>
+      </div>
+    </nav>
+
+    <main>
+      <!-- HOME DECOR -->
+      <section class="cat-section" id="decor">
+        <h2 class="section-title">Home Decor</h2>
+        <div id="decorSubs"></div>
+      </section>
+
+      <!-- GIFTING ACCESSORIES -->
+      <section class="cat-section" id="gifts">
+        <h2 class="section-title">Gifting Accessories</h2>
+        <div id="giftSubs"></div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="footer">
+      <div class="footer-top">
+        <div>
+          <span class="footer-logo">HavenCraft</span>
+          <p class="footer-tagline">Craft your space, your way</p>
+          <div class="footer-socials">
+            <a href="#" class="soc" aria-label="Instagram">📸</a>
+            <a href="#" class="soc" aria-label="Pinterest">📌</a>
+            <a href="#" class="soc" aria-label="Facebook">👥</a>
+            <a href="#" class="soc" aria-label="Twitter">🐦</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="#decor">Decor</a></li>
+            <li><a href="#gifts">Gifts</a></li>
+            <li><a href="#footer">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="#decor">Wall Art</a></li>
+            <li><a href="#decor">Cushions</a></li>
+            <li><a href="#gifts">Hampers</a></li>
+            <li><a href="#gifts">Photo Frames</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="#">hello@havencraft.in</a></li>
+            <li><a href="#">+91 98765 43210</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Track Order</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bot">
+        <p>© 2026 HavenCraft. All rights reserved.</p>
+        <p>Made with ❤️ for your space</p>
+      </div>
+    </footer>
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div class="overlay" id="detailOverlay" role="dialog" aria-modal="true">
+      <div class="modal" id="detailModal">
+        <div class="modal-head">
+          <span class="modal-title" id="detailTitle"></span>
+          <button class="close-btn" id="detailClose">✕</button>
+        </div>
+        <div class="modal-body">
+          <img class="detail-img" id="detailImg" src="" alt="" />
+          <div class="detail-price" id="detailPrice"></div>
+          <div class="detail-desc" id="detailDesc"></div>
+          <div
+            class="detail-actions"
+            style="display: flex; flex-direction: column; gap: 12px"
+          >
+            <button
+              class="btn btn-buy"
+              id="detailAddCart"
+              style="
+                background: linear-gradient(135deg, var(--sage), #5e8363);
+                color: #fff;
+              "
+            >
+              🛒 Add to Cart
+            </button>
+            <button class="btn btn-cust" id="detailCust">✏️ Customize</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <script src="auth.js"></script>
+    <script src="customization.js"></script>
+    <script src="./home.js"></script>
+  </body>
+</html>

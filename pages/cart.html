@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Cart – HavenCraft</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./cart.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav id="navbar">
+      <a href="index.html" class="nav-logo">HavenCraft</a>
+      <div class="nav-actions">
+        <!-- Global Cart Icon -->
+        <a
+          href="cart.html"
+          style="
+            text-decoration: none;
+            position: relative;
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-right: 12px;
+          "
+        >
+          🛒<span
+            class="global-cart-badge"
+            id="cartBadge"
+            style="
+              position: absolute;
+              top: -4px;
+              right: -8px;
+              background: var(--rose);
+              color: #fff;
+              font-size: 0.65rem;
+              font-weight: 700;
+              width: 18px;
+              height: 18px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              transition: transform 0.2s;
+            "
+            >0</span
+          >
+        </a>
+        <!-- Auth Navigation Handled via auth.js dynamically mapping .nav-links -->
+        <ul
+          class="nav-links"
+          style="
+            display: flex;
+            list-style: none;
+            gap: 12px;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+          "
+        >
+          <li class="auth-node">
+            <a href="login.html" class="btn-outline">Login</a>
+          </li>
+          <li class="auth-node">
+            <a href="signup.html" class="btn-primary">Sign Up</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- MAIN CART CONTENT -->
+    <div class="cart-container">
+      <div>
+        <h1 class="cart-header">Your Shopping Cart</h1>
+        <div id="cartItemsContainer" class="cart-items">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+      <!-- SUMMARY SIDEBAR -->
+      <aside class="cart-summary" id="cartSummaryPanel">
+        <h2 class="summary-title">Order Summary</h2>
+        <div class="summary-row">
+          <span>Total Items</span>
+          <span id="summaryCount">0</span>
+        </div>
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="summarySubtotal">₹0</span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span>Free</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <span id="summaryTotal">₹0</span>
+        </div>
+        <button class="checkout-btn" onclick="proceedToCheckout()">
+          Proceed to Checkout
+        </button>
+      </aside>
+    </div>
+
+    <!-- TOAST INJECTION -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="auth.js"></script>
+    <script src="customization.js"></script>
+    <script src="cart.js"></script>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+ @media (min-width: 960px) {
+            .auth-page {
+                padding: 0;
+            }
+
+            .auth-layout {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                min-height: 100vh;
+                width: 100%;
+            }
+
+            .auth-aside {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 24px;
+                padding: 80px 48px;
+                background: linear-gradient(160deg, #f3ede5 0%, var(--beige) 50%, #e9f0e9 100%);
+                position: relative;
+                overflow: hidden;
+                order: 2;
+                /* illustration on the right for signup */
+            }
+
+            .aside-blob {
+                position: absolute;
+                border-radius: 50%;
+                pointer-events: none;
+                filter: blur(60px);
+            }
+
+            .aside-blob-1 {
+                width: 320px;
+                height: 320px;
+                background: rgba(212, 144, 126, 0.20);
+                top: -80px;
+                left: -60px;
+            }
+
+            .aside-blob-2 {
+                width: 250px;
+                height: 250px;
+                background: rgba(138, 173, 143, 0.20);
+                bottom: -50px;
+                right: -50px;
+            }
+
+            .aside-content {
+                position: relative;
+                z-index: 1;
+                text-align: center;
+                max-width: 340px;
+            }
+
+            .aside-gallery {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 28px;
+            }
+
+            .aside-gallery img {
+                border-radius: 16px;
+                object-fit: cover;
+                width: 100%;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+                transition: transform 0.4s ease;
+            }
+
+            .aside-gallery img:hover {
+                transform: scale(1.03);
+            }
+
+            .aside-gallery img:first-child {
+                grid-row: span 2;
+                height: 220px;
+            }
+
+            .aside-gallery img:not(:first-child) {
+                height: 102px;
+            }
+
+            .aside-title {
+                font-family: 'Cormorant Garamond', serif;
+                font-size: 1.85rem;
+                font-weight: 600;
+                color: var(--text-dark);
+                line-height: 1.25;
+                margin-bottom: 10px;
+            }
+
+            .aside-sub {
+                font-size: 0.87rem;
+                color: var(--text-mid);
+                line-height: 1.6;
+                font-weight: 300;
+            }
+
+            .auth-page-right {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 80px 40px;
+                background: var(--cream);
+                order: 1;
+            }
+        }
+
+        /* Signup card a bit wider to fit 4 fields comfortably */
+        .auth-card {
+            max-width: 480px;
+        }

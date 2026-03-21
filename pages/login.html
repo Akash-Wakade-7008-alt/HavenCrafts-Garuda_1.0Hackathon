@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Login to your HavenCraft account and continue customizing your space." />
+    <title>Login – HavenCraft</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="auth.css" />
+
+    <link rel="stylesheet" href="./login.css">
+</head>
+
+<body>
+
+    <!-- Background decorative blobs (for non-split layout) -->
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-2"></div>
+    <div class="bg-blob bg-blob-3"></div>
+
+    <!-- Navbar -->
+    <nav class="auth-nav" style="display:flex;justify-content:space-between;align-items:center;padding:0 6%;">
+        <div style="width: 24px;"></div> <!-- Spacer -->
+        <a href="index.html" class="auth-nav-logo" style="margin:0 auto;">HavenCraft</a>
+        <a href="cart.html" style="text-decoration: none; position: relative; font-size: 1.4rem; color: var(--text-dark);">
+            🛒<span class="global-cart-badge" style="position: absolute; top: -4px; right: -8px; background: var(--rose, #d4907e); color: #fff; font-size: 0.65rem; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">0</span>
+        </a>
+    </nav>
+
+    <!-- Main -->
+    <main class="auth-page">
+        <div class="auth-layout">
+
+            <!-- Left illustration panel (desktop only) -->
+            <aside class="auth-aside">
+                <div class="aside-blob aside-blob-1"></div>
+                <div class="aside-blob aside-blob-2"></div>
+                <div class="aside-content">
+                    <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&q=80&auto=format&fit=crop"
+                        alt="Beautifully curated home decor items" class="aside-illustration" />
+                    <h2 class="aside-title">Your Space,<br /><em
+                            style="font-style:italic;color:var(--sage-dark)">Perfectly Crafted</em></h2>
+                    <p class="aside-sub">Log back in to continue building your dream space with handcrafted,
+                        personalised products.</p>
+                    <div class="aside-badges">
+                        <span class="aside-badge">🎨 Customizable</span>
+                        <span class="aside-badge">✨ Premium Quality</span>
+                        <span class="aside-badge">🚚 Fast Delivery</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Right form panel -->
+            <div class="auth-page-right">
+                <div class="auth-card" role="main" aria-label="Login form">
+
+                    <span class="auth-logo">HavenCraft</span>
+                    <h1 class="auth-title">Welcome Back</h1>
+                    <p class="auth-sub">Login to continue customizing your space</p>
+
+                    <form class="auth-form" id="loginForm" novalidate>
+
+                        <!-- Email -->
+                        <div class="form-group" id="emailGroup">
+                            <label class="form-label" for="email">Email Address</label>
+                            <div class="input-wrap">
+                                <input class="form-input" type="email" id="email" name="email" autocomplete="email"
+                                    placeholder="you@example.com" aria-describedby="emailError" aria-required="true" />
+                            </div>
+                            <span class="form-error" id="emailError" role="alert" aria-live="polite">
+                                ⚠ Please enter a valid email address.
+                            </span>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-group" id="passwordGroup">
+                            <label class="form-label" for="password">Password</label>
+                            <div class="input-wrap">
+                                <input class="form-input" type="password" id="password" name="password"
+                                    autocomplete="current-password" placeholder="Enter your password"
+                                    aria-describedby="passwordError" aria-required="true" />
+                                <button type="button" class="eye-toggle" id="pwToggle" aria-label="Show password">
+                                    👁
+                                </button>
+                            </div>
+                            <span class="form-error" id="passwordError" role="alert" aria-live="polite">
+                                ⚠ Password cannot be empty.
+                            </span>
+                        </div>
+
+                        <!-- Forgot password -->
+                        <div class="form-row">
+                            <a href="#" class="forgot-link" id="forgotLink">Forgot Password?</a>
+                        </div>
+
+                        <!-- Submit -->
+                        <a href="./home.html">
+                            <button type="submit" class="btn-submit" id="loginBtn">
+                                <div class="spinner"></div>
+                                <span class="btn-text">Login</span>
+                            </button>
+                        </a>
+
+                    </form>
+
+                    <div class="auth-divider" style="margin-top:24px;">or</div>
+
+                    <p class="auth-switch">
+                        Don't have an account? <a href="signup.html">Sign Up</a>
+                    </p>
+
+                </div><!-- /.auth-card -->
+            </div><!-- /.auth-page-right -->
+
+        </div><!-- /.auth-layout -->
+    </main>
+
+    <!-- Global toast notification -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <!-- Forgot password modal -->
+    <div id="forgotModal" style="
+    position:fixed;inset:0;background:rgba(44,44,44,0.45);backdrop-filter:blur(6px);
+    z-index:2000;display:flex;align-items:center;justify-content:center;
+    opacity:0;pointer-events:none;transition:opacity 0.3s ease;
+  ">
+        <div style="
+      background:var(--warm-white);border-radius:20px;padding:40px 36px;
+      max-width:400px;width:90%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,0.13);
+      position:relative;transform:scale(0.94) translateY(16px);
+      transition:transform 0.35s cubic-bezier(0.34,1.4,0.64,1);
+    " id="forgotBox">
+            <button onclick="closeForgot()" style="
+        position:absolute;top:16px;right:18px;background:none;border:none;
+        font-size:1.2rem;color:var(--text-light);cursor:pointer;transition:color 0.2s;
+      " aria-label="Close">✕</button>
+            <div style="font-size:2.2rem;margin-bottom:16px;">🔒</div>
+            <h2
+                style="font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;margin-bottom:8px;color:var(--text-dark);">
+                Forgot Password?</h2>
+            <p style="font-size:0.88rem;color:var(--text-mid);font-weight:300;margin-bottom:24px;line-height:1.6;">Enter
+                your email and we'll send you a reset link.</p>
+            <input type="email" id="forgotEmail" placeholder="your@email.com" style="
+        width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:12px;
+        font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;background:var(--cream);
+        transition:border-color 0.25s;margin-bottom:16px;
+      " />
+            <button onclick="sendReset()" style="
+        width:100%;padding:13px;border:none;border-radius:12px;
+        background:linear-gradient(135deg,var(--sage),var(--sage-dark));
+        color:#fff;font-family:'DM Sans',sans-serif;font-size:0.92rem;font-weight:600;
+        cursor:pointer;box-shadow:0 4px 18px rgba(94,131,99,0.35);
+        transition:all 0.25s;
+      ">Send Reset Link</button>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="./login.js">
+        
+    </script>
+</body>
+
+</html>

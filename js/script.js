@@ -8,6 +8,10 @@
             { name: 'Rattan Lamp Shade', desc: 'Natural rattan woven pendant lampshade, boho style.', price: '₹1,799', badge: '', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=75&auto=format&fit=crop' },
             { name: 'Printed Table Runner', desc: 'Hand-block printed cotton table runner — 72 inch.', price: '₹599', badge: '', img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&q=75&auto=format&fit=crop' },
             { name: 'Gallery Wall Set', desc: '6-piece gallery wall kit with botanical art prints.', price: '₹1,149', badge: 'Trending', img: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=400&q=75&auto=format&fit=crop' },
+            { name: 'Vintage Floor Rug', desc: 'Handwoven Persian-style vintage area rug in muted tones.', price: '₹3,499', badge: 'Trending', img: 'https://images.unsplash.com/photo-1534889156217-d643df14f14a?w=400&q=75&auto=format&fit=crop' },
+            { name: 'Abstract Ceramic Vase', desc: 'Modern sculptural vase with a textured matte finish.', price: '₹899', badge: 'New', img: 'https://images.unsplash.com/photo-1581783342308-f78100f7e9f3?w=400&q=75&auto=format&fit=crop' },
+            { name: 'Woven Storage Basket', desc: 'Eco-friendly seagrass storage basket for throws and magazines.', price: '₹1,199', badge: '', img: 'https://images.unsplash.com/photo-1610385906323-fa53dc9fcffe?w=400&q=75&auto=format&fit=crop' },
+            { name: 'Brass Sunset Mirror', desc: 'Minimalist round wall mirror with brushed brass frame.', price: '₹1,999', badge: 'Premium', img: 'https://images.unsplash.com/photo-1618220179428-22790b461013?w=400&q=75&auto=format&fit=crop' }
         ];
 
         const giftingProducts = [
@@ -19,6 +23,10 @@
             { name: 'Luxe Soap Set', desc: '4-piece artisan cold-process soap set with organic ingredients.', price: '₹699', badge: '', img: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&q=75&auto=format&fit=crop' },
             { name: 'Memory Shadowbox', desc: 'Deep wooden shadowbox to display photos, tickets & mementos.', price: '₹1,349', badge: 'Trending', img: 'https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=400&q=75&auto=format&fit=crop' },
             { name: 'Celebration Cookie Tin', desc: 'Hand-decorated butter cookies in a keepsake tin. 500g.', price: '₹749', badge: 'Festive', img: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=75&auto=format&fit=crop' },
+            { name: 'Artisan Tea Box', desc: 'Wooden selection box featuring 6 loose-leaf organic tea blends.', price: '₹1,499', badge: 'Festive', img: 'https://images.unsplash.com/photo-1576092762791-dd9e22204481?w=400&q=75&auto=format&fit=crop' },
+            { name: 'Monogram Leather Wallet', desc: 'Full-grain leather wallet with custom gold-foil monogramming.', price: '₹1,299', badge: 'Customizable', img: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&q=75&auto=format&fit=crop' },
+            { name: 'Crystal Glass Set', desc: 'Set of 4 etched crystal tumblers for whiskey or cocktails.', price: '₹2,199', badge: 'Premium', img: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400&q=75&auto=format&fit=crop' },
+            { name: 'Curated Succulent Garden', desc: 'Three beautiful assorted succulents in modern ceramic pots.', price: '₹849', badge: 'Bestseller', img: 'https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=400&q=75&auto=format&fit=crop' }
         ];
 
         /* ---- Render Cards ---- */
@@ -34,7 +42,7 @@
             <div class="card-desc">${product.desc}</div>
             <div class="card-price">${product.price}</div>
             <div class="card-actions">
-              <button class="btn btn-rose action-btn add-cart-btn" aria-label="Add to cart ${product.name}">Add to Cart</button>
+              <button class="btn btn-primary action-btn add-cart-btn" aria-label="Buy Now ${product.name}">Buy Now</button>
               <button class="btn btn-ghost action-btn" aria-label="Customize ${product.name}">Customize</button>
             </div>
           </div>
@@ -42,8 +50,11 @@
       `;
         }
 
-        document.getElementById('homeDecorGrid').innerHTML = homeDecorProducts.map(buildCard).join('');
-        document.getElementById('giftingGrid').innerHTML = giftingProducts.map(buildCard).join('');
+        const decorRowHTML = `<div class="product-grid" style="margin-bottom: 32px;">${homeDecorProducts.map(buildCard).join('')}</div>`;
+        document.getElementById('homeDecorGrid').outerHTML = decorRowHTML + decorRowHTML + decorRowHTML;
+
+        const giftingRowHTML = `<div class="product-grid" style="margin-bottom: 32px;">${giftingProducts.map(buildCard).join('')}</div>`;
+        document.getElementById('giftingGrid').outerHTML = giftingRowHTML + giftingRowHTML + giftingRowHTML;
 
         /* ---- Modal Logic ---- */
         const modal = document.getElementById('loginModal');
@@ -75,41 +86,13 @@
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('add-cart-btn')) {
                 e.stopPropagation();
-                const card = e.target.closest('.product-card');
-                const name = card.querySelector('.card-name').textContent;
-                const priceStr = card.querySelector('.card-price').textContent;
-                const price = parseInt(priceStr.replace(/[^0-9]/g, ''));
-                const img = card.querySelector('.card-img-wrap img').src;
-                
-                let cartItems = JSON.parse(localStorage.getItem('hc_cart_items') || '[]');
-                const existingIndex = cartItems.findIndex(i => i.name === name);
-                
-                if (existingIndex > -1) {
-                    cartItems[existingIndex].qty = (cartItems[existingIndex].qty || 1) + 1;
-                } else {
-                    cartItems.push({
-                        name: name,
-                        price: price,
-                        img: img,
-                        desc: card.querySelector('.card-desc').textContent,
-                        id: 'p' + Date.now(),
-                        qty: 1
-                    });
-                }
-                localStorage.setItem('hc_cart_items', JSON.stringify(cartItems));
-                
-                // Update badges
-                const totalQty = cartItems.reduce((sum, item) => sum + (item.qty || 1), 0);
-                [document.getElementById('cartBadge'), document.getElementById('mobileCartBadge')].forEach(badge => {
-                    if (badge) {
-                        badge.textContent = totalQty;
-                        badge.style.transform = 'scale(1.4)';
-                        setTimeout(() => badge.style.transform = 'scale(1)', 200);
-                    }
-                });
+                openModal();
                 return;
             }
-            if (e.target.classList.contains('action-btn')) openModal();
+            if (e.target.classList.contains('action-btn')) {
+                e.stopPropagation();
+                openModal();
+            }
         });
 
         // init cart badge count
@@ -158,3 +141,18 @@
         );
 
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        /* ---- Explicit Auth Redirections ---- */
+        const lgBtn = document.getElementById('loginBtn');
+        const mbgLgBtn = document.getElementById('mobileLoginBtn');
+        const suBtn = document.getElementById('signupBtn');
+        const mbgSuBtn = document.getElementById('mobileSignupBtn');
+        
+        [lgBtn, mbgLgBtn].forEach(btn => {
+            if (btn) btn.addEventListener('click', (e) => { e.preventDefault(); window.location.href = 'pages/login.html'; });
+        });
+        
+        [suBtn, mbgSuBtn].forEach(btn => {
+            if (btn) btn.addEventListener('click', (e) => { e.preventDefault(); window.location.href = 'pages/signup.html'; });
+        });
+

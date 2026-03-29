@@ -150,11 +150,9 @@
                 signupBtn.classList.add('success');
                 signupBtn.querySelector('.btn-text').textContent = '✓ Account created!';
 
-                // Smart Navigation Check
-                const redirect = localStorage.getItem('redirectAfterLogin') || 'home.html';
+                // Navigation Check
                 localStorage.removeItem('redirectAfterLogin');
-
-                setTimeout(() => window.location.href = redirect, 1000);
+                setTimeout(() => window.location.href = 'home.html', 1000);
             }, 1400);
         });
 

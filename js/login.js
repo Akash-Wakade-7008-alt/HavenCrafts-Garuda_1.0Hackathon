@@ -94,11 +94,9 @@
                 loginBtn.classList.add('success');
                 loginBtn.querySelector('.btn-text').textContent = '✓ Logged In';
 
-                // Smart Navigation Check
-                const redirect = localStorage.getItem('redirectAfterLogin') || 'home.html';
+                // Navigation Check
                 localStorage.removeItem('redirectAfterLogin');
-
-                setTimeout(() => window.location.href = redirect, 800);
+                setTimeout(() => window.location.href = 'home.html', 800);
             }, 800);
         });
 
